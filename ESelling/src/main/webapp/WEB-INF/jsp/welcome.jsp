@@ -61,11 +61,14 @@
 				<br class="clear" />
 				<div class="menu">
 					<ul>
-						<li><a href="#">Sign In</a></li>
+						<li><a href="<spring:url value="/login" />">Sign In</a></li>
 						
+						<li><a href=""><pre>   |   </pre></a></li>
+						
+						<li><a href="<spring:url value="/vendorSignUp" />">New Vendor?</a></li>
 						<li><a href="#"><pre>   |   </pre></a></li>
 						
-						<li><a href="#">Sign Up</a></li>
+						<li><a href="<spring:url value="/customerSignUp" />">New Customer?</a></li>
 					</ul>
 					<br style="clear: left" />
 				</div>

@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class CreditCard implements Serializable {
@@ -19,19 +19,19 @@ public class CreditCard implements Serializable {
 	@Id
 	@GeneratedValue
 	private long creditCardId;
-	@NotEmpty(message="{NotEmpty.CreditCard.number.validation}")
-	@Pattern(regexp="[2-9]{16}", message="{Pattern.CreditCard.number.validation}")
+	@NotNull(message="{NotEmpty.CreditCard.number.validation}")
+	//@Pattern(regexp="[2-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
 	private Long creditCardNo;
 	private String creditCardType;
-	@NotEmpty(message="{NotEmpty.CreditCard.expireMonth.validation}")
-	private int expMonth;
-	@NotEmpty(message="{NotEmpty.CreditCard.expireYear.validation}")
-	private int expYear;
-	@NotEmpty(message="{NotEmpty.CreditCard.cvv.validation}")
-	@NotNull @Size(min=3, max=3, message="{Pattern.CreditCard.cvv.validation}")
-	private int securityCode;
+	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
+	private Integer expMonth;
+	@NotNull(message="{NotEmpty.CreditCard.expireYear.validation}")
+	private  Integer expYear;
+	@NotNull(message="{NotEmpty.CreditCard.cvv.validation}")
+	@Range(min=100, max=999) 
+	private  Integer securityCode;
 	@NotEmpty(message="{NotEmpty.CreditCard.name.validation}")
-	@Pattern(regexp="[a-zA-z]+ [a-zA-Z]*[.]? [a-zA-Z]+", message="{Pattern.CreditCard.name.validation}")
+	//@Pattern(regexp="[a-zA-z]+ [a-zA-Z]*[.]? [a-zA-Z]+", message="{Pattern.CreditCard.name.validation}")
 	private String nameOnCard;
 	private BigDecimal creditLimit;
 
@@ -81,27 +81,27 @@ public class CreditCard implements Serializable {
 	public void setCreditCardNo(Long creditCardNo) {
 		this.creditCardNo = creditCardNo;
 	}
-	public int getExpMonth() {
+	public Integer getExpMonth() {
 		return expMonth;
 	}
 
-	public void setExpMonth(int expMonth) {
+	public void setExpMonth(Integer expMonth) {
 		this.expMonth = expMonth;
 	}
 
-	public int getExpYear() {
+	public Integer getExpYear() {
 		return expYear;
 	}
 
-	public void setExpYear(int expYear) {
+	public void setExpYear(Integer expYear) {
 		this.expYear = expYear;
 	}
 
-	public int getSecurityCode() {
+	public Integer getSecurityCode() {
 		return securityCode;
 	}
 
-	public void setSecurityCode(int securityCode) {
+	public void setSecurityCode(Integer securityCode) {
 		this.securityCode = securityCode;
 	}
 

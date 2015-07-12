@@ -57,6 +57,7 @@ public class ProductController {
 			System.out.println(rootDirectory);
 
 			try {
+			
 
 				product.setProductPath("E:\\resources\\images\\" + product.getProductName()
 						+ ".png");
@@ -71,6 +72,7 @@ public class ProductController {
 		}
 				
 		}	
+		product.setApproval("pending");
 		Category cat = categoryService.find(product.getCategory().getCategoryId());
 		
 		cat.addProducts(product);

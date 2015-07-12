@@ -7,46 +7,48 @@
 "text/html; charset=ISO-8859-1">
 
 <title>Login</title>
+<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
 
-<h3 class="panel-title">Please sign in</h3>
-
-<c:if test="${not empty error}">
-<div class="alert alert-danger">
+<section>
+		<div class="jumbotron">
+			<div class="container">	
+				<c:if test="${not empty error}">
+<div class="alert alert-danger"  >
 <spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 </div>
 </c:if>
-<form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
+			</div>
+			
+		</div>
+	</section>
+<section class="container">
+<form action="<c:url value="/j_spring_security_check"></c:url>"  class="form-horizontal" method="post">
+<fieldset>
+				<legend>LogIn</legend>
 
-<div id="fieldset">
-<fieldset >
-<table >
-<tr>
-<td>
-<input class="form-control" placeholder="User Name" name='j_username' type="text">
-</td>
-</tr>
-
-<tr>
-<td>
-<input class="form-control" placeholder="Password" name='j_password' type="password" value="">
-</td>
-</tr>
-</table>
-<p align="left">
-<input  type="submit" value="Login">
-</p>
-
-<p align="left">
-			<a href="<spring:url value="/customerSignUp" />">New Customer ?</a>
-			<a href="<spring:url value="/vendorSignUp" />"> New Vendor ? </a>
-</p>
-
-</fieldset>
+<div class="form-group">
+<label class="control-label col-lg-2" for="firstName">UserName:</label>
+<div class="col-lg-10">
+<input class="form:input-large" placeholder="User Name" name='j_username' type="text">
 </div>
-</form>
+</div>
 
+<div class="form-group">
+<label class="control-label col-lg-2" for="firstName">Password:</label>
+<div class="col-lg-10">
+<input class="form:input-large" placeholder="Password" name='j_password' type="password" value="">
+</div>
+</div>
 
+<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="LogIn"/>
+					</div>
+				</div>	
+			</fieldset>
+	</form>
+	</section>
 </body>
 </html>

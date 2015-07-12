@@ -28,19 +28,11 @@ public class HomeController {
 	private CategoryService categoryService;
 	
 	@RequestMapping("/")
-	public String welcome(Model model) {
-		List<Product> products = productService.findAll();
-		model.addAttribute("products", products);
-		
+	public String welcome() {
+			
 		return "welcome";
 	}
 	
-
-	@ModelAttribute
-	public void init(Model model){
-		List<Category> category = categoryService.findAll();
-		model.addAttribute("categories", category);
-	}
 
 	 @RequestMapping("/welcome")
 	    public String defaultAfterLogin(HttpServletRequest request) {
@@ -51,6 +43,13 @@ public class HomeController {
 	        return "CustomerPage";
 	    }
 	
+	 @ModelAttribute
+		public void init(Model model){
+		 List<Product> products = productService.findAll();
+			model.addAttribute("products", products);
+			List<Category> category = categoryService.findAll();
+			model.addAttribute("categories", category);
+		}
 
 }
 

@@ -138,8 +138,7 @@
 			
 				<label class="control-label col-lg-2" for="password">Password:</label>
 				<div class="col-lg-10">	
-				<form:input class="form:input-larg" id="password" path="credentials.password" value=""
-						type="password" />
+				<form:input class="form:input-larg" id="password" path="credentials.password" value="" type="password" />
 						  <form:errors path="password" cssClass="text-danger" /> 					
 		</div>
 				</div>
@@ -186,7 +185,7 @@
 				<form:select class="form:input-large" id="expMonth" path="creditCard.expMonth">
 			
 						<form:options items="${months}" />
-					 <form:errors path="creditCard.expMonth" cssClass="text-danger" /> 
+					  <form:errors path="creditCard.expMonth" cssClass="text-danger" /> 
 					</form:select>
 			</div>
 				</div>
@@ -196,7 +195,7 @@
 				<div class="col-lg-10">
 			<form:select  class="form:input-large" id="expYear" path="creditCard.expYear">
 						<form:options items="${years}" />
-				 <form:errors path="creditCard.expYear" cssClass="text-danger"/> 
+				 <form:errors path="creditCard.expYear" cssClass="text-danger"/>  
 					</form:select>
 			</div>
 				</div>

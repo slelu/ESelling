@@ -22,7 +22,6 @@
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h3>Products</h3>
 				<p>Add products</p>
 			</div>
 			
@@ -31,7 +30,7 @@
 	<section class="container">
 		<form:form  modelAttribute="product" class="form-horizontal" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Add new product</legend>
+				<legend>New product</legend>
 
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
