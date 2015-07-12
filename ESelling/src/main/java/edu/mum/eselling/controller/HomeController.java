@@ -21,7 +21,8 @@ public class HomeController {
 	        if (request.isUserInRole("ROLE_VENDOR")) {
 	            return "welcome";
 	        }
-	        return "customer";
+	        
+	        return "CustomerPage";
 	    }
 	
 }

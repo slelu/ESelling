@@ -45,12 +45,12 @@
 				
 				<div class="form-group">
 				<label class="control-label col-lg-2" for="email">Email:</label>
-				<div class="col-lg-10">
+				<!-- <div class="col-lg-10"> -->
 				<form:input class="form:input-large" id="email" path="email" value="" />
 				  <form:errors path="email" cssClass="text-danger" />  
 				
 			</div>
-				</div>
+				
 				
 				<div class="form-group">
 			<label class="control-label col-lg-2" for="phone">Phone Number:</label>

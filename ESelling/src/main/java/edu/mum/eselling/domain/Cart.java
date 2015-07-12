@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
 
 
 public class Cart implements Serializable {

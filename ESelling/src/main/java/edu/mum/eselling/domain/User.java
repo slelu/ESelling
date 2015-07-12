@@ -43,6 +43,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address address;
 	
+    @Valid	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private CreditCard creditCard;
 
 	public long getId() {
 		return id;
@@ -94,6 +97,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 	}
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
+	}
+	
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 	
 	}
