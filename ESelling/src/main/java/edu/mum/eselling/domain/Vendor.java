@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 @Entity
 public class Vendor extends User implements Serializable {
@@ -46,7 +47,7 @@ public class Vendor extends User implements Serializable {
 		return products;
 	}
 
-	public void addproducts(Product product) {
+	public void addProducts(Product product) {
 		products.add(product);
 	}
 

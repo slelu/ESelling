@@ -11,14 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
  
 @Entity(name = "USERS_CREDNTIAL")
 public class Credentials {
-
+@NotEmpty(message="{User.UserName}")
 	 @Id
 	 @Column(name = "USERNAME", nullable = false, unique = true)
  	String username;
-	 @Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	String password;
 	 @Transient
 	String verifyPassword;

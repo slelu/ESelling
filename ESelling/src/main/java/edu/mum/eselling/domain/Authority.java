@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
 
 @Entity(name = "AUTHORITIES")
 public class Authority {
@@ -13,7 +14,6 @@ public class Authority {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID")
 	private int id;
-
 	private String username;
   	@Column(name = "AUTHORITY", nullable = false)
  	private String authority;

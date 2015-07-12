@@ -9,14 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+
 public class Cart implements Serializable {
 
 	private static final long serialVersionUID = -6212595579666071819L;
-	@Id
-	@GeneratedValue
+
+	
 	private Long cartId;
-	@ElementCollection
+	
 	private Map<String, CartItem> cartItems;
 	private BigDecimal grandTotal;
 

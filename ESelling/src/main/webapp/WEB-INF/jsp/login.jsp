@@ -14,9 +14,7 @@
 
 <c:if test="${not empty error}">
 <div class="alert alert-danger">
-<spring:message code=
-"AbstractUserDetailsAuthenticationProvider.
-badCredentials"/><br />
+<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 </div>
 </c:if>
 <form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
@@ -36,9 +34,15 @@ badCredentials"/><br />
 </td>
 </tr>
 </table>
-<p align="right">
+<p align="left">
 <input  type="submit" value="Login">
 </p>
+
+<p align="left">
+			<a href="<spring:url value="/customerSignUp" />">New Customer ?</a>
+			<a href="<spring:url value="/vendorSignUp" />"> New Vendor ? </a>
+</p>
+
 </fieldset>
 </div>
 </form>

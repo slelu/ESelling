@@ -3,12 +3,20 @@ package edu.mum.eselling.service;
 import java.util.List;
 
 import edu.mum.eselling.domain.Product;
-import edu.mum.eselling.domain.ProductSearchCriteria;
+
+
 
 public interface ProductService {
-	List<Product> findAll();
-	public List<Product> findByFilter(ProductSearchCriteria productSearchCriteria);
 	
-	Product findProduct(long id);
+	public List<Product> findAll();
 	
+	/*public Product find(Long productId);
+	public List<Product> findItemsByCategory(Long categoryId);*/
+	public Product  save(Product product);
+	
+	public List<Product> getAllProducts(Long id);
+	//public List<Product> findByFilter(SearchDto searchDto);
+	
+	
+
 }

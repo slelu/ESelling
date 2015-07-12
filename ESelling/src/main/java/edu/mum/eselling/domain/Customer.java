@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 
 @Entity
@@ -16,7 +17,7 @@ import javax.persistence.OneToOne;
 
 		private static final long serialVersionUID = -3794885616176050983L;
 		
-			
+		@Valid	
 		@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 		private CreditCard creditCard;
 

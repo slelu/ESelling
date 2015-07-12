@@ -6,11 +6,29 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import org.springframework.stereotype.Repository;
+
 import edu.mum.eselling.domain.Product;
 
-public interface ProductRepository extends CrudRepository<Product,Long>{
-	@Query("SELECT p FROM Product p WHERE p.category.categoryId = :categoryId and p.productName = :productName")
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+	/*@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
+	public List<Product> findProductsByCategory(
+			@Param(value = "categoryId") Long categoryId);
+
+	@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId and p.productCondition = :condition and p.unitPrice <= :price")
 	public List<Product> findByFilter(
 			@Param(value = "categoryId") Long categoryId,
-			@Param(value = "productName") String productName);
+			@Param(value = "condition") String condition,
+			@Param(value = "price") double price);
+
+		*/
+
+	
+	@Query("SELECT product FROM Vendor v  INNER JOIN v.products product WHERE v.id= :id")
+	 public List<Product> getAllProductsById(@Param(value = "id")Long id);
+
+
+
 }

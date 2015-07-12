@@ -8,9 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -21,18 +25,19 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long productId;
-
+	@NotEmpty(message="{ProductName.validation}")
 	private String productName;
-
+	@NotEmpty(message="{ProductDescription.validation}")
 	private String description;
 	@ManyToOne
+	@Valid
 	private Category category;
-
+	@NotNull (message="{UnitPrice.validation}")
 	private BigDecimal unitPrice;
 	@JsonIgnore
 	@Transient
 	private MultipartFile productImage;
-
+	@Min(1)
 	private long unitsInStock;
 	private String productCondition;
 	private String productPath;
