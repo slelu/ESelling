@@ -36,9 +36,15 @@ badCredentials"/><br />
 </td>
 </tr>
 </table>
-<p align="right">
+<p align="left">
 <input  type="submit" value="Login">
 </p>
+
+<p align="left">
+			<a href="<spring:url value="/customerSignUp" />">New Customer ?</a>
+			<a href="<spring:url value="/vendorSignUp" />"> New Vendor ? </a>
+</p>
+
 </fieldset>
 </div>
 </form>

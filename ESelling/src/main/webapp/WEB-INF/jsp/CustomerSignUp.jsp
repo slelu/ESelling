@@ -7,10 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%-- <title><spring:message code="label.form.title"></spring:message></title> --%>
+<title>Customer Registration</title>
 </head>
+
 <body>
+<h2>Customer Registration </h2>
 	<form:form modelAttribute="newCustomer" method="POST" enctype="utf8">
+	
 		<table>
 			<tr>
 				<td><label>First Name:</label></td>
@@ -91,6 +94,7 @@
 			</tr>
 
 			<tr>
+			
 				<td><label>Card Number:</label></td>
 				<td><form:input path="creditCard.creditCardNo" value=""
 						type="text" /> <%-- <form:errors path="creditCard.crediCardNo" element="div" /> --%>

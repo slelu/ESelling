@@ -46,7 +46,7 @@ public class Vendor extends User implements Serializable {
 		return products;
 	}
 
-	public void addproducts(Product product) {
+	public void addProducts(Product product) {
 		products.add(product);
 	}
 
