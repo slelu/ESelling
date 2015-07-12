@@ -2,9 +2,12 @@ package edu.mum.eselling.controller;
 
 import java.util.Arrays;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,13 +45,17 @@ public class LogInController {
 	}
 		
 	@RequestMapping(value="/customerSignUp", method=RequestMethod.GET)
-	public String customerSignup(@ModelAttribute("newCustomer")Customer customer){
+	public String customerSignup(@ModelAttribute Customer customer){
 			
 		return "CustomerSignUp";
 	}
 	
 	@RequestMapping(value="/customerSignUp", method=RequestMethod.POST)
-	public String processCustomerSignUp(@ModelAttribute("newCustomer")Customer customer){
+	public String processCustomerSignUp(@Valid @ModelAttribute Customer customer,BindingResult result){
+		if(result.hasErrors())
+		{
+			return "CustomerSignUp";
+		}
 		
 		
 		CustomerService.addNewCustomer(customer);
@@ -56,14 +63,17 @@ public class LogInController {
 		return "redirect:/welcome";
 	}
 	@RequestMapping(value="/vendorSignUp", method=RequestMethod.GET)
-	public String vendorSignup(@ModelAttribute("newCustomer")Vendor vendor){
+	public String vendorSignup(@ModelAttribute Vendor vendor){
 			
 		return "VendorSignUp";
 	}
 	
 	@RequestMapping(value="/vendorSignUp", method=RequestMethod.POST)
-	public String processVendorSignUp(@ModelAttribute("newVendor")Vendor vendor){
-		
+	public String processVendorSignUp(@Valid @ModelAttribute Vendor vendor,BindingResult result){
+		if(result.hasErrors())
+		{
+			return "VendorSignUp";
+		}
 		
 		vendorService.addNewVendor(vendor);
 		

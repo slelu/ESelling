@@ -11,6 +11,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 	@MappedSuperclass
@@ -21,18 +24,22 @@ import javax.persistence.OneToOne;
 	@Id
 	@GeneratedValue
 	private long id;
-
+    @NotEmpty(message="{User.FirstName}")
 	private String firstName;
+    @NotEmpty(message="{User.LastName}")
 	private String lastName;
+    @NotEmpty(message="{User.Email}")
 	private String email;
+    @NotEmpty(message="{User.Phone}")
 	private String phone;
-	//private String username;
+    @NotEmpty(message="{User.Password}")
 	private String password;
 	
+    @Valid
 	@OneToOne(fetch=FetchType.LAZY) 
 	@JoinColumn(name="USERNAME") 
 	private Credentials credentials;
-
+    @Valid
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address address;
 	
@@ -74,12 +81,7 @@ import javax.persistence.OneToOne;
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	/*public String getUsername() {
-	return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}*/
+	
 	public String getPassword() {
 		return password;
 	}

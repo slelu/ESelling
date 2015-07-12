@@ -6,20 +6,20 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
  
 @Entity(name = "USERS_CREDNTIAL")
 public class Credentials {
-
+@NotEmpty(message="{User.UserName}")
 	 @Id
 	 @Column(name = "USERNAME", nullable = false, unique = true)
  	String username;
-	 @Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	String password;
 	String verifyPassword;
 	Boolean enabled;

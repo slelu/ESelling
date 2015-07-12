@@ -8,113 +8,156 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Vendor Registration</title>
+<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<h2>Vendor Registration</h2>
-	<form:form modelAttribute="newCustomer" method="POST" enctype="utf8">
-		<table>
-			<tr>
-				<td><label>First Name:</label></td>
-				<td><form:input path="firstName" value="" /> <%--  <form:errors path="firstName" element="div"/> --%>
-				</td>
-			</tr>
-			<tr>
-				<td><label>Last Name:</label></td>
-				<td><form:input path="lastName" value="" /> <%-- <form:errors path="lastName" element="div" /> --%>
-				</td>
-			</tr>
+<section>
+		<div class="jumbotron">
+			<div class="container">
+	
+				<p>Vendor Registration</p>
+			</div>
 			
-			<tr>
-				<td><label>Email:</label></td>
-				<td><form:input path="email" value="" /> <%--  <form:errors path="email" element="div" />  --%>
-				</td>
-			</tr>
+		</div>
+	</section>
+	<section class="container">
+	<form:form modelAttribute="vendor"  class="form-horizontal" method="POST" enctype="utf8">
+		<fieldset>
+				<legend>New Vendor</legend>
 
-			<tr>
-				<td><label>Phone Number:</label></td>
-				<td><form:input path="phone" value="" /> <%--  <form:errors path="phone" element="div" /> --%>
-				</td>
-			</tr>
-
-			<tr>
-				<td><label>Business Name:</label></td>
-				<td><form:input path="businessContact.businessName" value="" /> <%-- <form:errors path="businessContact.businessName" element="div" /> --%>
-				</td>
-			</tr>
-			
-			<tr>
-				<td><label>Business PhoneNo:</label></td>
-				<td><form:input path="businessContact.businessPhoneNo" value="" /> <%-- <form:errors path="businessContact.businessPhoneNo" element="div" /> --%>
-				</td>
-			</tr>
-			<tr>
-				<td><label>Contact Person:</label></td>
-				<td><form:input path="businessContact.contactPersonName" value="" /> <%-- <form:errors path="businessContact.contactPersonName" element="div" /> --%>
-				</td>
-			</tr>
-			<tr>
-				<td><label>Street:</label></td>
-				<td><form:input path="address.street" value="" type="text" />
-					<%-- <form:errors path="address.street" element="div" /> --%></td>
-			</tr>
-
-			<tr>
-				<td><label>State:</label></td>
-				<td><form:select path="address.state">
-				<%-- <form:option value="0" label="-state-" /> --%>
-						<form:options items="${states}" />
-						<%-- <form:errors path="address.state" element="div" /> --%>
-					</form:select></td>
+				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 				
-			</tr>
-
-			<tr>
-				<td><label>Zip Code:</label></td>
-				<td><form:input path="address.zipcode" value="" type="text" />
-					<%-- <form:errors path="address.zipcode" element="div" /> --%></td>
-			</tr>
-			<tr>
-				<td>
+				<div class="form-group">
+				<label class="control-label col-lg-2" for="firstName">First Name:</label>
+				<div class="col-lg-10">
+				<form:input  class="form:input-large" id="firstName" path="firstName" value="" /> 
+				 <form:errors path="firstName" cssClass="text-danger"/>
+			</div>
+				</div>
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="lastName">Last Name:</label>
+				<div class="col-lg-10">
+				<form:input class="form:input-large" id="lastName" path="lastName" value="" />
+				<form:errors path="lastName" cssClass="text-danger" />
+			</div>
+				</div>
+				
+				<div class="form-group">
+				<label class="control-label col-lg-2" for="email">Email:</label>
+				<div class="col-lg-10">
+				<form:input class="form:input-large" id="email" path="email" value="" />
+				 <form:errors path="email" cssClass="text-danger" /> 
+				
+			</div>
+				</div>
+				
+				<div class="form-group">
+			<label class="control-label col-lg-2" for="phone">Phone Number:</label>
+			<div class="col-lg-10">
+				<form:input  class="form:input-large"  id="phone" path="phone" value="" /> 
+				  <form:errors path="phone" cssClass="text-danger" /> 
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<label class="control-label col-lg-2" for="businessName">Business Name:</label>
+				<div class="col-lg-10">
+				<form:input  class="form:input-large"  id="businessName" path="businessContact.businessName" value="" />
+				<form:errors path="businessContact.businessName" cssClass="text-danger" /> 
+				</div>
+				</div>
+				
+			   <div class="form-group">
+				<label class="control-label col-lg-2" for="businessName">Business PhoneNo:</label>
+				<div class="col-lg-10">
+			  <form:input  class="form:input-larg" id="businessName" path="businessContact.businessPhoneNo" value="" /> 
+			   <form:errors path="businessContact.businessPhoneNo" cssClass="text-danger" />
+			  </div>
+				</div>
+			
+			<div class="form-group">
+				<label  class="control-label col-lg-2" for="contactPersonName">Contact Person:</label>
+				<div class="col-lg-10">
+				<form:input class="form:input-larg" id="contactPersonName" path="businessContact.contactPersonName" value="" />
+				  <form:errors path="businessContact.contactPersonName" cssClass="text-danger" /> 
+				</div>
+				</div>
+			
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="street">Street:</label>
+				<div class="col-lg-10">
+				<form:input  class="form:input-larg"  id="street" path="address.street" value="" type="text" />
+					 <form:errors path="address.street" cssClass="text-danger" />
+		</div>
+				</div>
+				
+               <div class="form-group">
+				<label class="control-label col-lg-2" for="state">State:</label>	
+			<div class="col-lg-10">	
+              <form:select  class="form:input-larg" id="state" path="address.state">
+						<form:options items="${states}" />
+						 <form:errors path="address.state" cssClass="text-danger" /> 
+					</form:select>
+					</div>
+				</div>
+				
+			
+            <div class="form-group">
+				<label class="control-label col-lg-2" for="zipcode">Zip Code:</label>
+				<div class="col-lg-10">	
+				<form:input  class="form:input-larg" id="zipcode" path="address.zipcode" value="" type="text" />
+					<form:errors path="address.zipcode" cssClass="text-danger" />
+			</div>
+				</div>
+			
+				
 					<!-- <label class="control-label col-lg-2" for="authority">Role</label> -->
 					<form:hidden path="credentials.authority[0].authority"
 						value="ROLE_VENDOR" /> <%-- <form:errors path="credentials.authority[0].authority" cssClass="text-danger"/> --%>
-				</td>
-			<tr>
-				<td><form:hidden path="credentials.enabled" value="TRUE" /></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
+				
+			
+				<form:hidden path="credentials.enabled" value="TRUE" />
+			
+				
+			
 
-			<tr>
-				<td><label>User Name:</label></td>
-				<td><form:input path="credentials.username" value="" /> <%-- <form:errors path="credentials.username" element="div" /> --%>
-				</td>
-			</tr>
+			 <div class="form-group">
+			<label class="control-label col-lg-2" for="username">User Name:</label>
+				<div class="col-lg-10">	
+				<form:input class="form:input-larg" id="username" path="credentials.username" value="" />
+				  <form:errors path="credentials.username" cssClass="text-danger" />
+			</div>
+				</div>
+			
+              <div class="form-group">
+			
+				<label class="control-label col-lg-2" for="password">Password:</label>
+				<div class="col-lg-10">	
+				<form:input class="form:input-larg" id="password" path="credentials.password" value=""
+						type="password" />
+						  <form:errors path="password" cssClass="text-danger" /> 					
+		</div>
+				</div>
+				
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="verifyPassword">Verify Password:</label>
+               <div class="col-lg-10">	
+				<form:input class="form:input-larg" id="verifyPassword" path="credentials.verifyPassword" value="" type="password" /> 
+					 <form:errors path="credentials.verifyPassword" cssClass="text-danger" /> 
+						
+				</div>
+				</div>
+			
 
-			<tr>
-				<td><label>Password:</label></td>
-				<td><form:input path="credentials.password" value=""
-						type="password" /> <%-- <form:errors path="password" element="div" /> --%>
-				</td>
-			</tr>
-			<tr>
-				<td><label>Verify Password:</label></td>
-				<td><form:input path="credentials.verifyPassword" value=""
-						type="password" /> <%-- <form:errors path="credentials.verifyPassword" element="div" /> --%>
-				</td>
-			</tr>
-
-		</table>
-
-		<p align="justify">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit"
-				value="Submit" tabindex="5">
-		</p>
-	</form:form>
+		<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Register"/>
+					</div>
+				</div>
+				
+			</fieldset>
+		</form:form>
+	</section>
 
 </body>
 

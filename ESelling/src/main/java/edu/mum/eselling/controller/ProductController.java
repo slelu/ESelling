@@ -3,10 +3,12 @@ package edu.mum.eselling.controller;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,18 +41,19 @@ public class ProductController {
 		return "ProductForm";
 	}
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute Product product,HttpServletRequest request ,@RequestParam("id") String id,Model model) {
+	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,@RequestParam("id") String id,Model model) {
 	
-		/*if(result.hasErrors()){
+		if(result.hasErrors()){
 			model.addAttribute("categories", categoryService.findAll());
-			return "itemForm";
-		}*/
+			return "ProductForm";
+		}
 		MultipartFile itemImage = product.getProductImage();
 	
 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 
 		if (itemImage != null && !itemImage.isEmpty()) {
+			System.out.println(rootDirectory);
 
 			try {
 
@@ -79,7 +82,7 @@ public class ProductController {
 		model.addAttribute("Vendor",vendor);
 		model.addAttribute("VendorItem", productService.getAllProducts(Long.parseLong(id)));
        
-		return "usersHome";
+		return "welcome";
 
 	}
 	

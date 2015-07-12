@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Address implements Serializable {
 
@@ -13,9 +15,11 @@ public class Address implements Serializable {
 	@Id
 	@GeneratedValue
 	private long addressId;
-	
+	@NotEmpty(message="{User.Street}")
 	private String street;
+	@NotEmpty(message="{User.State}")
 	private String state;
+	@NotEmpty(message="{User.ZipCode}")
 	private String zipcode;
 
 	public long getAddressId() {

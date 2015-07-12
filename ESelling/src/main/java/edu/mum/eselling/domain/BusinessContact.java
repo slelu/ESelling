@@ -13,6 +13,7 @@ public class BusinessContact implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long businessContactId;
+	
 	private String businessName;
 	private String contactPersonName;
 	private String businessPhoneNo;
