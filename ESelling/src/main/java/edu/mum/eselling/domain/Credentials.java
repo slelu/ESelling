@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -21,6 +22,7 @@ public class Credentials {
  	String username;
 	@Column(name = "PASSWORD", nullable = false)
 	String password;
+	 @Transient
 	String verifyPassword;
 	Boolean enabled;
 

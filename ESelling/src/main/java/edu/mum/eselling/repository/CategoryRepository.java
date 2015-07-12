@@ -1,4 +1,6 @@
 
+
+
 package edu.mum.eselling.repository;
 
 
@@ -10,4 +12,3 @@ import edu.mum.eselling.domain.Category;
 public interface CategoryRepository extends CrudRepository<Category,Long>{
 
 }
-

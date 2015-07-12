@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Repository;
 
 import edu.mum.eselling.domain.Product;
@@ -27,6 +28,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	@Query("SELECT product FROM Vendor v  INNER JOIN v.products product WHERE v.id= :id")
 	 public List<Product> getAllProductsById(@Param(value = "id")Long id);
+
 
 
 }

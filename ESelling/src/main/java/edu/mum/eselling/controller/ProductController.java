@@ -1,5 +1,6 @@
 package edu.mum.eselling.controller;
 
+
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,4 +92,5 @@ public class ProductController {
 		 model.addAttribute("products",productService.findAll());
 		 model.addAttribute("categories", categoryService.findAll());	 
 	 }
+
 }

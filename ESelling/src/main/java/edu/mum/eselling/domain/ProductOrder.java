@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class ProductOrder implements Serializable {
@@ -24,11 +25,9 @@ public class ProductOrder implements Serializable {
 	private Date orderDate;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address shippingAddress;
-
-	/*private BigDecimal orderPrice;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private BigDecimal orderPrice;
+	@Transient
 	private Cart cart;
-*/
 	public ProductOrder() {
 		super();
 	}
@@ -41,13 +40,13 @@ public class ProductOrder implements Serializable {
 		this.shippingAddress = shippingAddress;
 	}
 
-	/*public BigDecimal getOrderPrice() {
+	public BigDecimal getOrderPrice() {
 		return orderPrice;
 	}
 
 	public void setOrderPrice(BigDecimal orderPrice) {
 		this.orderPrice = orderPrice;
-	}*/
+	}
 
 	public long getOrderId() {
 		return orderId;

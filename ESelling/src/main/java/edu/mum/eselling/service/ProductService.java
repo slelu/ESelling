@@ -5,6 +5,7 @@ import java.util.List;
 import edu.mum.eselling.domain.Product;
 
 
+
 public interface ProductService {
 	
 	public List<Product> findAll();
@@ -15,8 +16,6 @@ public interface ProductService {
 	
 	public List<Product> getAllProducts(Long id);
 	//public List<Product> findByFilter(SearchDto searchDto);
-	
-	
 	
 	
 
