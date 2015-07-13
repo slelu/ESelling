@@ -1,7 +1,5 @@
 package edu.mum.eselling.controller;
 
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,39 +15,34 @@ import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.ProductService;
 
-
 @Controller
 public class HomeController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@RequestMapping("/")
 	public String welcome(Model model) {
-		List<Product> products = productService.findAll();
-		model.addAttribute("products", products);
-		
 		return "welcome";
 	}
-	
 
 	@ModelAttribute
-	public void init(Model model){
+	public void init(Model model) {
 		List<Category> category = categoryService.findAll();
 		model.addAttribute("categories", category);
+		List<Product> products = productService.findAll();
+		model.addAttribute("products", products);
 	}
 
-	 @RequestMapping("/welcome")
-	    public String defaultAfterLogin(HttpServletRequest request) {
-	        if (request.isUserInRole("ROLE_VENDOR")) {
-	            return "welcome";
-	        }
-	        return "customer";
-	    }
-	
+	@RequestMapping("/welcome")
+	public String defaultAfterLogin(HttpServletRequest request) {
+		if (request.isUserInRole("ROLE_VENDOR")) {
+			return "welcome";
+		}
+		return "customer";
+	}
 
 }
-

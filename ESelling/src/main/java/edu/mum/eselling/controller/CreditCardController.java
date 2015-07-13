@@ -1,21 +1,31 @@
 package edu.mum.eselling.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.eselling.domain.CreditCard;
+import edu.mum.eselling.domain.CreditCardType;
 import edu.mum.eselling.service.CreditCardTypeService;
 
-
+@Controller
 public class CreditCardController {
 
 	@Autowired
 	private CreditCardTypeService creditCardTypeService;
 
-	@RequestMapping("/filmon")
-	public String creditCard() {
-		/*CreditCard creditCard = new CreditCard();
-		model.addAttribute("creditCard", creditCard);*/
+	@RequestMapping(value = "/creditcard", method = RequestMethod.GET)
+	public String creditCard(Model model) {
+		CreditCard creditCard = new CreditCard();
+		model.addAttribute("creditCard", creditCard);
+		List<CreditCardType> creditCardType = creditCardTypeService.findAll();
+		model.addAttribute("creditCardTypes", creditCardType);
 		return "creditCard";
 	}
 
@@ -26,7 +36,7 @@ public class CreditCardController {
 		return "creditCard";
 	}*/
 
-	/*@ModelAttribute
+	@ModelAttribute
 	public void init(Model model) {
 		List<CreditCardType> creditCardType = creditCardTypeService.findAll();
 		model.addAttribute("creditCardType", creditCardType);
@@ -45,5 +55,5 @@ public class CreditCardController {
 			months.add("11");
 			months.add("12");
 		model.addAttribute("months", months);
-	}*/
+	}
 }

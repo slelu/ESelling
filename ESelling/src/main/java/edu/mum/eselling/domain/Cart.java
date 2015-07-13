@@ -2,43 +2,53 @@ package edu.mum.eselling.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Map;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
-
+/*@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)*/
 public class Cart implements Serializable {
 
 	private static final long serialVersionUID = -6212595579666071819L;
 
-	
-	private Long cartId;
-	
-	private Map<String, CartItem> cartItems;
+	private Map<Product, Integer> cartProducts;
 	private BigDecimal grandTotal;
 
 	public Cart() {
 		super();
 	}
 
-	public Long getCartId() {
-		return cartId;
-	}
-	
-	public void setCartId(Long cartId) {
-		this.cartId = cartId;
-	}
+    public Map<Product, Integer> getProducts() {
+        return Collections.unmodifiableMap(this.cartProducts);
+    }
 
-	public Map<String, CartItem> getCartItems() {
-		return cartItems;
-	}
+    public void addProduct(Product book) {
+        if (this.cartProducts.containsKey(book)) {
+            int quantity = this.cartProducts.get(book);
+            quantity++;
+            this.cartProducts.put(book, quantity);
+        } else {
+            this.cartProducts.put(book, 1);
+        }
+    }
 
-	public void setCartItems(Map<String, CartItem> cartItems) {
-		this.cartItems = cartItems;
-	}
+    public void removeProduct(Product book) {
+        this.cartProducts.remove(book);
+    }
+
+    public void clear() {
+        this.cartProducts.clear();
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+        builder.append("cartProducts", this.cartProducts.keySet());
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 	public BigDecimal getGrandTotal() {
 		return grandTotal;

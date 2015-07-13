@@ -29,8 +29,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findAll() {
 		return (List<Product>) productRepository.findAll();
 	}
-
-	/*public Product find(Long productId) {
+	
+	public Product getProductById(Long productId){
+		return  productRepository.findOne(productId);
+	}
+/*	public Product find(Long productId) {
 		return ProductRepository.findOne(productId);
 	}
 
@@ -45,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 	
    public List<Product> getAllProducts(Long vendorid){
 		
-		return productRepository.getAllProductsById(vendorid);
+		return productRepository.getAllProductsByVendorId(vendorid);
 	}
 
 
