@@ -8,7 +8,11 @@ import edu.mum.eselling.domain.Product;
 
 public interface ProductService {
 	
-	public List<Product> findAll();
+
+	public List<Product> findPendingProducts();
+	public List<Product> findApprovedProducts();
+	
+
 	/*public Product find(Long productId);
 	public List<Product> findItemsByCategory(Long categoryId);*/
 	public Product  save(Product product);

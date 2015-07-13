@@ -37,5 +37,10 @@ public class VendorServiceImpl implements VendorService{
 		
 		vendorRepository.save(vendor);
 	}
+	
+	public Vendor getVendorByUserName(String name){
+	
+	return vendorRepository.findVendorByUserName(name);
+}
 }
 

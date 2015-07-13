@@ -26,8 +26,12 @@ public class ProductServiceImpl implements ProductService {
 				Double.parseDouble(filterElements.getPrice()));
 	}*/
 
-	public List<Product> findAll() {
-		return (List<Product>) productRepository.findAll();
+	public List<Product> findApprovedProducts() {
+		return (List<Product>) productRepository.findApprovedProducts();
+	}
+	
+	public List<Product> findPendingProducts() {
+		return (List<Product>) productRepository.findPendingProducts();
 	}
 	
 	public Product getProductById(Long productId){

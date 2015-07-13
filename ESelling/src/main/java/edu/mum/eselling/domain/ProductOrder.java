@@ -29,6 +29,13 @@ public class ProductOrder implements Serializable {
 	@Transient
 	private Cart cart;
 
+
+	
+	
+	/*private Map<Product, Integer> productsInOrder;*/
+	
+
+
 	public ProductOrder() {
 		super();
 	}
