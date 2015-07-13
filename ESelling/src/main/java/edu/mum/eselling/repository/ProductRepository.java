@@ -16,18 +16,17 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	/*@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
 	public List<Product> findProductsByCategory(
 			@Param(value = "categoryId") Long categoryId);
-
 	@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId and p.productCondition = :condition and p.unitPrice <= :price")
 	public List<Product> findByFilter(
 			@Param(value = "categoryId") Long categoryId,
 			@Param(value = "condition") String condition,
 			@Param(value = "price") double price);
-
 		*/
 
 	
 	@Query("SELECT product FROM Vendor v  INNER JOIN v.products product WHERE v.id= :id")
 	 public List<Product> getAllProductsByVendorId(@Param(value = "id")Long id);
+
 
 	@Query("SELECT p FROM Product p   WHERE p.productApproval= 'approved' ")
 	public List<Product> findApprovedProducts() ;
@@ -36,3 +35,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT p FROM Product p   WHERE p.productApproval= 'pending' ")
 	public List<Product> findPendingProducts() ;
 }
+
+
+
+
+
+

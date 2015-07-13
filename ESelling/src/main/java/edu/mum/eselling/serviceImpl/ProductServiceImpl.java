@@ -33,8 +33,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findPendingProducts() {
 		return (List<Product>) productRepository.findPendingProducts();
 	}
-
-	/*public Product find(Long productId) {
+	
+	public Product getProductById(Long productId){
+		return  productRepository.findOne(productId);
+	}
+/*	public Product find(Long productId) {
 		return ProductRepository.findOne(productId);
 	}
 

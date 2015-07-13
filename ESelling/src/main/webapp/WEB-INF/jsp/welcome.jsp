@@ -10,6 +10,8 @@
 <style type="text/css"></style>
 <link href="resources/css/all.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
 	<!-- Header goes here--->
@@ -63,10 +65,14 @@
 					<ul>
 						<li><a href="<spring:url value="/login" />">Sign In</a></li>
 						
+
 						<li><a href=""><pre>   |   </pre></a></li>
 						
 						<li><a href="<spring:url value="/vendorSignUp" />">New Vendor?</a></li>
 						<li><a href="#"><pre>   |   </pre></a></li>
+
+						<li><a href="#"><pre id="separator">   |   </pre></a></li>
+
 						
 						<li><a href="<spring:url value="/customerSignUp" />">New Customer?</a></li>
 					</ul>
@@ -88,19 +94,19 @@
 						<div class="innerproduct">
 							<div>
 								<div class="titleOptions">
-									<a> <img
+									<a href="<spring:url value="/products/product?id=${product.productId}" />"> <img
 										src="<c:url value="${product.productPath}"></c:url>"
 										height="246px" width="190px">
 									</a>
 								</div>
 								<div class="productinfo">
 									<div class="productdescription">
-										<a href=""> <span class="large bold">
+										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="large bold">
 												${product.productName} </span>
 										</a>
 									</div>
 									<div class="productprice">
-										<a href=""> <span class="bold large red">$${product.unitPrice }</span>
+										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red">$${product.unitPrice }</span>
 										</a>
 									</div>
 								</div>

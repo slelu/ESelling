@@ -28,6 +28,12 @@ public class ProductOrder implements Serializable {
 	private BigDecimal orderPrice;
 	@Transient
 	private Cart cart;
+
+	
+	
+	/*private Map<Product, Integer> productsInOrder;*/
+	
+
 	public ProductOrder() {
 		super();
 	}

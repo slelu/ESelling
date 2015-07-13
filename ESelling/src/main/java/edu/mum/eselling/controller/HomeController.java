@@ -2,7 +2,9 @@ package edu.mum.eselling.controller;
 
 
 
+
 import java.security.Principal;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,26 +22,30 @@ import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
 
 
-
 @Controller
 public class HomeController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
+
 	
 	@Autowired
 	private VendorService vendorService;
 	
 	
+
+
+
 	@RequestMapping("/")
-	public String welcome() {
-			
+
+	public String welcome(Model model) {
+
 		return "welcome";
 	}
-	
+
 
 	 @RequestMapping("/welcome")
 	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal ) {
@@ -72,4 +78,3 @@ public class HomeController {
 		}
 
 }
-
