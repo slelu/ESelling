@@ -1,7 +1,5 @@
 package edu.mum.eselling.controller;
 
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,31 +15,23 @@ import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.ProductService;
 
-
 @Controller
 public class HomeController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@RequestMapping("/")
-	public String welcome() {
-			
+
+
+	public String welcome(Model model) {
+
 		return "welcome";
 	}
-	
 
-	 @RequestMapping("/welcome")
-	    public String defaultAfterLogin(HttpServletRequest request) {
-	        if (request.isUserInRole("ROLE_VENDOR")) {
-	            return "welcome";
-	        }
-	        
-	        return "CustomerPage";
-	    }
 	
 	 @ModelAttribute
 		public void init(Model model){
@@ -51,5 +41,13 @@ public class HomeController {
 			model.addAttribute("categories", category);
 		}
 
-}
+	@RequestMapping("/welcome")
+	public String defaultAfterLogin(HttpServletRequest request) {
+		if (request.isUserInRole("ROLE_VENDOR")) {
+			return "welcome";
+		}
+		return "customer";
+	}
 
+
+}

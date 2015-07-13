@@ -28,6 +28,7 @@ public class ProductOrder implements Serializable {
 	private BigDecimal orderPrice;
 	@Transient
 	private Cart cart;
+
 	public ProductOrder() {
 		super();
 	}

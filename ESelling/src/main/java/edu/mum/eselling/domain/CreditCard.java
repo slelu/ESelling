@@ -19,10 +19,13 @@ public class CreditCard implements Serializable {
 	@Id
 	@GeneratedValue
 	private long creditCardId;
+
 	@NotNull(message="{NotEmpty.CreditCard.number.validation}")
 	//@Pattern(regexp="[2-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
+
 	private Long creditCardNo;
-	private String creditCardType;
+
+	private CreditCardType creditCardType;
 	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
 	private Integer expMonth;
 	@NotNull(message="{NotEmpty.CreditCard.expireYear.validation}")
@@ -30,6 +33,7 @@ public class CreditCard implements Serializable {
 	@NotNull(message="{NotEmpty.CreditCard.cvv.validation}")
 	@Range(min=100, max=999) 
 	private  Integer securityCode;
+
 	@NotEmpty(message="{NotEmpty.CreditCard.name.validation}")
 	//@Pattern(regexp="[a-zA-z]+ [a-zA-Z]*[.]? [a-zA-Z]+", message="{Pattern.CreditCard.name.validation}")
 	private String nameOnCard;
@@ -49,11 +53,11 @@ public class CreditCard implements Serializable {
 		this.creditLimit = creditLimit;
 	}
 
-	public String getCreditCardType() {
+	public CreditCardType getCreditCardType() {
 		return creditCardType;
 	}
 
-	public void setCreditCardType(String creditCardType) {
+	public void setCreditCardType(CreditCardType creditCardType) {
 		this.creditCardType = creditCardType;
 	}
 

@@ -41,6 +41,7 @@ public class ProductController {
 
 		return "ProductForm";
 	}
+	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
 	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,@RequestParam("id") String id,Model model) {
 	
@@ -87,6 +88,13 @@ public class ProductController {
        
 		return "welcome";
 
+	}
+	
+	
+	@RequestMapping("/products/product")
+	public String getProductById(@RequestParam("id") String productId, Model model) {
+		model.addAttribute("product", productService.getProductById(Long.parseLong(productId)));
+		return "product";
 	}
 	
 	 @ModelAttribute
