@@ -2,6 +2,7 @@ package edu.mum.eselling.controller;
 
 
 import java.io.File;
+import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,6 +34,9 @@ public class ProductController {
 	@Autowired
 	VendorService vendorService;
 
+	
+	
+	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public String inputProduct(@ModelAttribute Product product, Model model) {		
 	//	model.addAttribute("vendor",vendorService.getVendor(Long.parseLong(userId)));
@@ -91,7 +95,7 @@ public class ProductController {
 	
 	 @ModelAttribute
 	 public void init(Model model){
-		 model.addAttribute("products",productService.findAll());
+		 model.addAttribute("products",productService.findApprovedProducts());
 		 model.addAttribute("categories", categoryService.findAll());	 
 	 }
 

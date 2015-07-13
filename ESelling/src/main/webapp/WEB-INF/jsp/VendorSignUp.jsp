@@ -139,7 +139,7 @@
 				<label class="control-label col-lg-2" for="password">Password:</label>
 				<div class="col-lg-10">	
 				<form:input class="form:input-larg" id="password" path="credentials.password" value="" type="password" />
-						  <form:errors path="password" cssClass="text-danger" /> 					
+						  <form:errors path="credentials.password" cssClass="text-danger" /> 					
 		</div>
 				</div>
 				

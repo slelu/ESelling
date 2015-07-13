@@ -18,11 +18,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Credentials {
 @NotEmpty(message="{User.UserName}")
 	 @Id
-	 @Column(name = "USERNAME", nullable = false, unique = true)
+	@Column(name = "USERNAME", nullable = false, unique = true)
  	String username;
 	@Column(name = "PASSWORD", nullable = false)
+	@NotEmpty(message="{User.Password}")
 	String password;
-	 @Transient
+	@Transient
 	String verifyPassword;
 	Boolean enabled;
 

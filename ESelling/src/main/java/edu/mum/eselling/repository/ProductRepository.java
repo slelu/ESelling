@@ -27,8 +27,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 	
 	@Query("SELECT product FROM Vendor v  INNER JOIN v.products product WHERE v.id= :id")
-	 public List<Product> getAllProductsById(@Param(value = "id")Long id);
+	 public List<Product> getAllProductsByVendorId(@Param(value = "id")Long id);
 
+	@Query("SELECT p FROM Product p   WHERE p.productApproval= 'approved' ")
+	public List<Product> findApprovedProducts() ;
 
-
+	
+	@Query("SELECT p FROM Product p   WHERE p.productApproval= 'pending' ")
+	public List<Product> findPendingProducts() ;
 }
