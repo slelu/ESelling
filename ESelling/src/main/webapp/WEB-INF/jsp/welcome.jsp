@@ -36,9 +36,11 @@
 						<div class="innerproduct">
 							<div>
 								<div class="titleOptions">
-									<a href="<spring:url value="/products/product?id=${product.productId}" />"> <img
+									<a href="<spring:url value="/products/product?id=${product.productId}" />"> 
+									<img
 										src="<c:url value="${product.productPath}"></c:url>"
 										height="246px" width="190px">
+										<img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="image"  height="246px" width="190px"/>  
 									</a>
 								</div>
 								<div class="productinfo">

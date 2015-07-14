@@ -38,16 +38,14 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
-	public String inputProduct(@ModelAttribute Product product, Model model) {		
-	//	model.addAttribute("vendor",vendorService.getVendor(Long.parseLong(userId)));
+	public String inputProduct(@ModelAttribute Product product, Model model ,Principal principal) {		
+	model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
 		
-	//	model.addAttribute("userItem", itemService.getAllItems(Long.parseLong(userId)));
-
 		return "addProduct";
 	}
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,@RequestParam("id") String id,Model model) {
+	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,Model model,Principal principal) {
 	
 		if(result.hasErrors()){
 			model.addAttribute("categories", categoryService.findAll());
@@ -64,11 +62,10 @@ public class ProductController {
 			try {
 			
 
-				product.setProductPath("E:\\resources\\images\\" + product.getProductName()
-						+ ".png");
-			
-				itemImage.transferTo(new File(rootDirectory
-								+ "\\resources\\images\\" + product.getProductName()
+product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".png");
+	//product.setProductPath(rootDirectory + "\\resources\\images\\" + product.getProductName()+ ".png");
+				itemImage.transferTo(new File(
+								 "E:\\resources\\images\\" + product.getProductName()
 								+ ".png"));
 				
 			}
@@ -78,19 +75,22 @@ public class ProductController {
 				
 		}	
 		product.setApproval("pending");
-		Category cat = categoryService.find(product.getCategory().getCategoryId());
+		//Category cat = categoryService.find(product.getCategory().getCategoryId());
 		
-		cat.addProducts(product);
-		Vendor vendor=vendorService.getVendor(Long.parseLong(id));
+		//cat.addProducts(product);
+		Vendor vendor=vendorService.getVendorByUserName(principal.getName());
+		//Vendor vendor=vendorService.getVendor(Long.parseLong(id));
 		vendor.addProducts(product);
 		
 		vendorService.saveVendor(vendor);
 		
-       // model.addAttribute("success" ,"item has been succesfully added to Your List");
-		model.addAttribute("Vendor",vendor);
-		model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
+        model.addAttribute("addproduct" ,"true");
+		model.addAttribute("vendor",vendor);
+		//model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
        
-		return "welcome";
+		
+		//model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
+		return "VendorPage";
 
 	}
 	
