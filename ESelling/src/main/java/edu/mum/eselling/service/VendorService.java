@@ -11,6 +11,6 @@ public interface VendorService {
 	public Vendor getVendor(Long vendorId);
 	public void saveVendor(Vendor vendor);
 	
-
+	public Vendor getVendorByUserName(String name);
 
 }

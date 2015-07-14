@@ -1,10 +1,5 @@
 package edu.mum.eselling.domain;
-/**
- * Object to hold the search criteria to search products.
- * 
- * @author Filmon
- *
- */
+
 public class ProductSearchCriteria {
 	private String productName;
 	private String productCategory;

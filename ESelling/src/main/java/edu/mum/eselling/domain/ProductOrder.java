@@ -31,7 +31,6 @@ public class ProductOrder implements Serializable {
 	private Date orderDate;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address shippingAddress;
-
 	private BigDecimal orderPrice;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Customer customer;
@@ -39,7 +38,8 @@ public class ProductOrder implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
-	
+
+
 	public ProductOrder() {
 		super();
 	}

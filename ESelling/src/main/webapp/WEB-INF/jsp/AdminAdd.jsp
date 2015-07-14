@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Customer Registration</title>
+<title>Admin Registration</title>
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 
@@ -16,7 +16,7 @@
 	<section class="container">
 	<form:form modelAttribute="customer" class="form-horizontal" method="POST" enctype="utf8">
 	<fieldset>
-				<legend>New Customer</legend>
+				<legend>New Administrator</legend>
 
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 				
@@ -37,12 +37,12 @@
 				
 				<div class="form-group">
 				<label class="control-label col-lg-2" for="email">Email:</label>
-				<div class="col-lg-10">
+				<!-- <div class="col-lg-10"> -->
 				<form:input class="form:input-large" id="email" path="email" value="" />
 				  <form:errors path="email" cssClass="text-danger" />  
 				
 			</div>
-				</div>
+				
 				
 				<div class="form-group">
 			<label class="control-label col-lg-2" for="phone">Phone Number:</label>
@@ -82,7 +82,7 @@
 				
 					<!-- <label class="control-label col-lg-2" for="authority">Role</label> -->
 					<form:hidden path="credentials.authority[0].authority"
-						value="ROLE_CUSTOMER" /> <%-- <form:errors path="credentials.authority[0].authority" cssClass="text-danger"/> --%>		
+						value="ROLE_ADMIN" /> <%-- <form:errors path="credentials.authority[0].authority" cssClass="text-danger"/> --%>		
 		
 			<form:hidden path="credentials.enabled" value="TRUE" />
 

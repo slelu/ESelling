@@ -32,8 +32,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 	private String email;
     @NotEmpty(message="{User.Phone}")
 	private String phone;
-    @NotEmpty(message="{User.Password}")
-	private String password;
+    
+    private String password;
+     
 	
     @Valid
 	@OneToOne(fetch=FetchType.LAZY) 
@@ -43,10 +44,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address address;
 	
+    @Valid	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private CreditCard creditCard;
 
 	public long getId() {
 		return id;
 	}
+	
 	
 	public void setId(long id) {
 		this.id = id;
@@ -69,6 +74,17 @@ import org.hibernate.validator.constraints.NotEmpty;
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	public String getPhone() {
 		return phone;
 	}
@@ -82,18 +98,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 		this.address = address;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public Credentials getCredentials() {
 		return credentials;
 	}
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
+	}
+	
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 	
 	}

@@ -39,6 +39,7 @@ public class Product implements Serializable {
 	private MultipartFile productImage;
 	@Min(1)
 	private long unitsInStock;
+	private String productApproval;
 	private String productCondition;
 	private String productPath;
 	//status values active,locked ,exhausted
@@ -76,6 +77,14 @@ public class Product implements Serializable {
 
 	public String getStatus() {
 		return Status;
+	}
+
+	public String getApproval() {
+		return productApproval;
+	}
+
+	public void setApproval(String productApproval) {
+		this.productApproval = productApproval;
 	}
 
 	public void setStatus(String status) {

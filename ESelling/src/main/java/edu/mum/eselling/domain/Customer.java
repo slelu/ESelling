@@ -17,10 +17,7 @@ import javax.validation.Valid;
 
 		private static final long serialVersionUID = -3794885616176050983L;
 		
-		@Valid	
-		@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-		private CreditCard creditCard;
-
+		
 		@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 		private List<ProductOrder> orders;
 		
@@ -28,13 +25,7 @@ import javax.validation.Valid;
 			super();
 		}
 
-		public CreditCard getCreditCard() {
-			return creditCard;
-		}
-
-		public void setCreditCard(CreditCard creditCard) {
-			this.creditCard = creditCard;
-		}
+		
 		
 		public List<ProductOrder> getOrders() {
 			return orders;

@@ -11,15 +11,7 @@
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<section>
-		<div class="jumbotron">
-			<div class="container">
-	
-				<p>Vendor Registration</p>
-			</div>
-			
-		</div>
-	</section>
+
 	<section class="container">
 	<form:form modelAttribute="vendor"  class="form-horizontal" method="POST" enctype="utf8">
 		<fieldset>
@@ -29,36 +21,41 @@
 				
 				<div class="form-group">
 				<label class="control-label col-lg-2" for="firstName">First Name:</label>
-				<div class="col-lg-10">
+				 <div class="col-lg-10">
 				<form:input  class="form:input-large" id="firstName" path="firstName" value="" /> 
 				 <form:errors path="firstName" cssClass="text-danger"/>
 			</div>
 				</div>
+				
 			<div class="form-group">
 				<label class="control-label col-lg-2" for="lastName">Last Name:</label>
-				<div class="col-lg-10">
+				 <div class="col-lg-10"> 
 				<form:input class="form:input-large" id="lastName" path="lastName" value="" />
 				<form:errors path="lastName" cssClass="text-danger" />
 			</div>
-				</div>
+			</div>
 				
-				<div class="form-group">
+				
+		
+				 <div class="form-group"> 
 				<label class="control-label col-lg-2" for="email">Email:</label>
-				<div class="col-lg-10">
+				 <div class="col-lg-10">
 				<form:input class="form:input-large" id="email" path="email" value="" />
 				 <form:errors path="email" cssClass="text-danger" /> 
+			
+			</div>
 				
 			</div>
-				</div>
-				
-				<div class="form-group">
+			
+						
+			<div class="form-group">
 			<label class="control-label col-lg-2" for="phone">Phone Number:</label>
-			<div class="col-lg-10">
+			 <div class="col-lg-10">
 				<form:input  class="form:input-large"  id="phone" path="phone" value="" /> 
 				  <form:errors path="phone" cssClass="text-danger" /> 
 				</div>
-				</div>
-				
+						</div>
+							
 				<div class="form-group">
 				<label class="control-label col-lg-2" for="businessName">Business Name:</label>
 				<div class="col-lg-10">
@@ -133,9 +130,8 @@
 			
 				<label class="control-label col-lg-2" for="password">Password:</label>
 				<div class="col-lg-10">	
-				<form:input class="form:input-larg" id="password" path="credentials.password" value=""
-						type="password" />
-						  <form:errors path="password" cssClass="text-danger" /> 					
+				<form:input class="form:input-larg" id="password" path="credentials.password" value="" type="password" />
+						  <form:errors path="credentials.password" cssClass="text-danger" /> 					
 		</div>
 				</div>
 				
@@ -148,6 +144,63 @@
 				</div>
 				</div>
 			
+<div class="form-group">
+			<label class="control-label col-lg-2" for="creditCardNo">Card Number:</label>
+			<div class="col-lg-10">	
+				<form:input class="form:input-large" id=" creditCardNo" path="creditCard.creditCardNo" value=""
+						type="text" /> 
+			 <form:errors path="creditCard.creditCardNo" cssClass="text-danger" /> 
+			</div>
+				</div>
+			
+		<div class="form-group">
+				<label class="control-label col-lg-2" for="expMonth">CardType:</label>
+					<div class="col-lg-10">
+				<form:select class="form:input-large" id="expMonth" path="creditCard.creditCardType">
+			
+						<form:options items="${creditType}" />
+					  <form:errors path="creditCard.creditCardType" cssClass="text-danger" /> 
+					</form:select>
+			</div>
+				</div>
+				
+			<div class="form-group">
+			<label class="control-label col-lg-2" for="nameOnCard">Name On Card:</label>
+			<div class="col-lg-10">	
+				<form:input class="form:input-large" id="nameOnCard" path="creditCard.nameOnCard" value=""
+						type="text" />
+		 <form:errors path="creditCard.nameOnCard"  cssClass="text-danger" /> 
+			</div>
+				</div>
+			
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="expMonth">Expire Month:</label>
+					<div class="col-lg-10">
+				<form:select class="form:input-large" id="expMonth" path="creditCard.expMonth">
+			
+						<form:options items="${months}" />
+					  <form:errors path="creditCard.expMonth" cssClass="text-danger" /> 
+					</form:select>
+			</div>
+				</div>
+
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="expYear">Expire Year:</label>
+				<div class="col-lg-10">
+			<form:select  class="form:input-large" id="expYear" path="creditCard.expYear">
+						<form:options items="${years}" />
+				 <form:errors path="creditCard.expYear" cssClass="text-danger"/>  
+					</form:select>
+			</div>
+				</div>
+				
+				<div class="form-group">
+				<label class="control-label col-lg-2" for="securityCode">3 Digit Security Code:</label>
+				<div class="col-lg-10">
+				<form:input class="form:input-large" id="securityCode" path="creditCard.securityCode" value="" type="password" />
+		 <form:errors path="creditCard.securityCode" cssClass="text-danger"/> 
+				</div>
+				</div>
 
 		<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
