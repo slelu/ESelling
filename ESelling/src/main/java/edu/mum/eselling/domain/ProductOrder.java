@@ -2,17 +2,23 @@ package edu.mum.eselling.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 public class ProductOrder implements Serializable {
@@ -27,11 +33,11 @@ public class ProductOrder implements Serializable {
 	private Address shippingAddress;
 
 	private BigDecimal orderPrice;
-	@Transient
-	private Cart cart;
-	
-	
-	/*private Map<Product, Integer> productsInOrder;*/
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Customer customer;
+	@JoinColumn(name = "order_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
 	
 	public ProductOrder() {
@@ -70,4 +76,44 @@ public class ProductOrder implements Serializable {
 		this.orderDate = orderDate;
 	}
 
+    public List<OrderDetail> getOrderDetails() {
+        return this.orderDetails;
+    }
+	
+	public int getTotalNumberOfProducts() {
+        int total = 0;
+        for (OrderDetail orderDetail : getOrderDetails()) {
+            total += orderDetail.getQuantity();
+        }
+        return total;
+    }
+	
+	/**
+     * Update the order details and update the total price. If the quantity is 0 or less the order detail is removed from the list.
+     */
+    public void updateOrderDetails() {
+        BigDecimal total = BigDecimal.ZERO;
+        Iterator<OrderDetail> details = this.orderDetails.iterator();
+        while (details.hasNext()) {
+            OrderDetail detail = details.next();
+            if (detail.getQuantity() <= 0) {
+                details.remove();
+            } else {
+                total = total.add(detail.getPrice());
+
+            }
+        }
+        total.setScale(2, RoundingMode.HALF_UP);
+        this.orderPrice = total;
+    }
+    
+    public void addOrderDetail(OrderDetail detail) {
+        if (this.orderDetails.add(detail)) {
+            if (this.orderPrice == null) {
+                this.orderPrice = detail.getPrice();
+            } else {
+                this.orderPrice = this.orderPrice.add(detail.getPrice());
+            }
+        }
+    }
 }

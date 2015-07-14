@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@
 										</a>
 									</div>
 									<div class="productprice">
-										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red">$${product.unitPrice }</span>
+										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red"><fmt:formatNumber value="${product.unitPrice}" type="currency"/></span>
 										</a>
 									</div>
 								</div>

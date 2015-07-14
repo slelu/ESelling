@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.springframework.transaction.annotation.Transactional;
 @Entity
 public class MyFinance implements Serializable {
 
@@ -20,12 +22,16 @@ public class MyFinance implements Serializable {
    
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private  CreditCard creditCard;
-    private BigDecimal creditBalance;
+    private BigDecimal creditLimit;
     private BigDecimal creditAvailable;
     private BigDecimal creditUsed;
 	
 	public MyFinance() {
 		super();
+	}
+	
+	public MyFinance(CreditCard creditCard){
+		this.creditCard = creditCard;
 	}
 
 	public CreditCard getCreditCard() {
@@ -36,12 +42,12 @@ public class MyFinance implements Serializable {
 		this.creditCard = creditCard;
 	}
 
-	public BigDecimal getCreditbalance() {
-		return creditBalance;
+	public BigDecimal getCreditLimit() {
+		return creditLimit;
 	}
 
-	public void setCreditbalance(BigDecimal creditBalance) {
-		this.creditBalance = creditBalance;
+	public void setCreditLimit(BigDecimal creditLimit) {
+		this.creditLimit = creditLimit;
 	}
 
 	public BigDecimal getCreditAvailable() {
