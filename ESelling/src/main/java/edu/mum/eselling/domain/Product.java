@@ -44,6 +44,8 @@ public class Product implements Serializable {
 	private String productPath;
 	//status values active,locked ,exhausted
 	private String Status;
+	@Transient
+	private Vendor vendor;
 
 	public Product() {
 		super();
@@ -138,4 +140,38 @@ public class Product implements Serializable {
 		this.productPath = productPath;
 	}
 
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Product other = (Product) object;
+
+        return (this.getProductId() == other.getProductId());
+    }
+
+    @Override
+    public int hashCode() {
+        return new org.apache.commons.lang.builder.HashCodeBuilder().append(this.getProductId()).toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return this.productId + " " + this.productName;
+    }
 }

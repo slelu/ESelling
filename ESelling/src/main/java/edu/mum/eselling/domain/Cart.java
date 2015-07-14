@@ -3,42 +3,57 @@ package edu.mum.eselling.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.stereotype.Component;
 
-
-/*@Component
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)*/
+@Component
 public class Cart implements Serializable {
 
 	private static final long serialVersionUID = -6212595579666071819L;
 
-	private Map<Product, Integer> cartProducts;
+	private Map<Product, Integer> cartProducts = new HashMap<Product, Integer>();
 	private BigDecimal grandTotal;
 
 	public Cart() {
 		super();
+		grandTotal = new BigDecimal(0);
 	}
 
     public Map<Product, Integer> getProducts() {
         return Collections.unmodifiableMap(this.cartProducts);
     }
 
-    public void addProduct(Product book) {
-        if (this.cartProducts.containsKey(book)) {
-            int quantity = this.cartProducts.get(book);
-            quantity++;
-            this.cartProducts.put(book, quantity);
+    public void addProduct(Product product, Integer productQuantity) {
+        if (this.cartProducts.containsKey(product)) {
+        	/*System.out.println("Key contained");
+            int quantity = this.cartProducts.get(product);
+            quantity++;*/
+            this.cartProducts.put(product, productQuantity);
+            grandTotal = product.getUnitPrice().multiply(new BigDecimal(productQuantity));
         } else {
-            this.cartProducts.put(book, 1);
+        	/*System.out.println("Key not contained");
+            this.cartProducts.put(product, 1);
+            grandTotal = grandTotal.add(product.getUnitPrice().multiply(new BigDecimal(1)));*/
+        	this.cartProducts.put(product, productQuantity);
+            grandTotal = product.getUnitPrice().multiply(new BigDecimal(productQuantity));
         }
+        
+        Iterator it = cartProducts.entrySet().iterator();   //line 1
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(((Product)pair.getKey()).getProductName() + " = " + pair.getValue());
+            /*it.remove();*/
+           }
     }
 
-    public void removeProduct(Product book) {
-        this.cartProducts.remove(book);
+    public void removeProduct(Product product) {
+        this.cartProducts.remove(product);
     }
 
     public void clear() {
