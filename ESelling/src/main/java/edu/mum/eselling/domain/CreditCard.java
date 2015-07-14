@@ -25,7 +25,7 @@ public class CreditCard implements Serializable {
 
 	private Long creditCardNo;
 
-	private CreditCardType creditCardType;
+	private String creditCardType;
 	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
 	private Integer expMonth;
 	@NotNull(message="{NotEmpty.CreditCard.expireYear.validation}")
@@ -53,11 +53,11 @@ public class CreditCard implements Serializable {
 		this.creditLimit = creditLimit;
 	}
 
-	public CreditCardType getCreditCardType() {
+	public String getCreditCardType() {
 		return creditCardType;
 	}
 
-	public void setCreditCardType(CreditCardType creditCardType) {
+	public void setCreditCardType(String creditCardType) {
 		this.creditCardType = creditCardType;
 	}
 

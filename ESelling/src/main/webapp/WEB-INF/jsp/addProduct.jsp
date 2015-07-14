@@ -1,32 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <title>Product</title>
-<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
 </head>
 <body>
 
 	<%-- <p><a
 			href="<spring:url value="/userpage?id=${user.id}" />"> BACK</a> </p>
 	<p>	<h4>Hello ${user.fname}</h4> </p> --%>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<p>Add products</p>
-			</div>
-			
-		</div>
-	</section>
+	
 	<section class="container">
 		<form:form  modelAttribute="product" class="form-horizontal" enctype="multipart/form-data">
 			<fieldset>

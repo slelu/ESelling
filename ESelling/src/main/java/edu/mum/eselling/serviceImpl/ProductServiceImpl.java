@@ -37,22 +37,22 @@ public class ProductServiceImpl implements ProductService {
 	public Product getProductById(Long productId){
 		return  productRepository.findOne(productId);
 	}
-/*	public Product find(Long productId) {
-		return ProductRepository.findOne(productId);
+	public Product find(Long productId) {
+		return productRepository.findOne(productId);
 	}
-
-	public List<Product> findItemsByCategory(Long categoryId) {
-		return (List<Product>) itemRepository.findItemsByCategory(categoryId);
-}*/
+	
+	public List<Product> findProductsByCategory(Long categoryId) {
+		return (List<Product>) productRepository.findProductsByCategory(categoryId);
+}
 
 	public Product save(Product product) {
 		return productRepository.save(product);
 
 	}
 	
-   public List<Product> getAllProducts(Long vendorid){
+   public List<Product> getAllProductsByVendorId(Long vendorId){
 		
-		return productRepository.getAllProductsByVendorId(vendorid);
+		return productRepository.getAllProductsByVendorId(vendorId);
 	}
 
 

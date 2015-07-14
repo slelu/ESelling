@@ -11,21 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.eselling.domain.CreditCard;
-import edu.mum.eselling.domain.CreditCardType;
-import edu.mum.eselling.service.CreditCardTypeService;
+
 
 @Controller
 public class CreditCardController {
 
-	@Autowired
-	private CreditCardTypeService creditCardTypeService;
+	
 
 	@RequestMapping(value = "/creditcard", method = RequestMethod.GET)
 	public String creditCard(Model model) {
 		CreditCard creditCard = new CreditCard();
 		model.addAttribute("creditCard", creditCard);
-		List<CreditCardType> creditCardType = creditCardTypeService.findAll();
-		model.addAttribute("creditCardTypes", creditCardType);
 		return "creditCard";
 	}
 
@@ -38,8 +34,6 @@ public class CreditCardController {
 
 	@ModelAttribute
 	public void init(Model model) {
-		List<CreditCardType> creditCardType = creditCardTypeService.findAll();
-		model.addAttribute("creditCardType", creditCardType);
 		List<String> months = new LinkedList<String>();
 			months.add("01");
 			months.add("02");

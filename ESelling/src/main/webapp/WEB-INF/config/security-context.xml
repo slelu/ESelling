@@ -51,8 +51,10 @@
 	
 
 	<security:authentication-manager>
+	
+ 
 		<security:authentication-provider>
-<!-- 			<security:password-encoder hash="bcrypt" /> -->
+ 			<security:password-encoder hash="bcrypt" /> 
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="select username,password,enabled from users_credntial where username=?"
@@ -60,6 +62,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-
+  
 
 </beans>

@@ -13,10 +13,13 @@ import edu.mum.eselling.domain.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-	/*@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
+     @Query("SELECT p FROM Product p WHERE p.category.categoryId = :categoryId")
 	public List<Product> findProductsByCategory(
 			@Param(value = "categoryId") Long categoryId);
-	@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId and p.productCondition = :condition and p.unitPrice <= :price")
+			
+			
+			
+	/*@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId and p.productCondition = :condition and p.unitPrice <= :price")
 	public List<Product> findByFilter(
 			@Param(value = "categoryId") Long categoryId,
 			@Param(value = "condition") String condition,

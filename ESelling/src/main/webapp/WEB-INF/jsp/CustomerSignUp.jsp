@@ -12,15 +12,7 @@
 </head>
 
 <body>
-<section>
-		<div class="jumbotron">
-			<div class="container">
-	
-				<p>Customer Registration</p>
-			</div>
-			
-		</div>
-	</section>
+
 	<section class="container">
 	<form:form modelAttribute="customer" class="form-horizontal" method="POST" enctype="utf8">
 	<fieldset>
@@ -132,12 +124,14 @@
 				</div>
 			
 		<div class="form-group">
-				<label class="control-label col-lg-2" for="creditCardType">CreditType:</label>
-<div class="col-lg-10">	
-				<form:input class="form:input-large" id="creditCardType" path="creditCard.creditCardType" value=""
-						type="text" /> 
-		 <form:errors path="creditCard.creditCardType" cssClass="text-danger" /> 
-				</div>
+				<label class="control-label col-lg-2" for="expMonth">CardType:</label>
+					<div class="col-lg-10">
+				<form:select class="form:input-large" id="expMonth" path="creditCard.creditCardType">
+			
+						<form:options items="${creditType}" />
+					  <form:errors path="creditCard.creditCardType" cssClass="text-danger" /> 
+					</form:select>
+			</div>
 				</div>
 				
 			<div class="form-group">

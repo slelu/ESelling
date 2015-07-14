@@ -4,7 +4,6 @@ package edu.mum.eselling.controller;
 
 
 import java.security.Principal;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.mum.eselling.domain.Category;
 import edu.mum.eselling.domain.Product;
+import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
 
@@ -35,6 +36,12 @@ public class HomeController {
 	@Autowired
 	private VendorService vendorService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
+	@Autowired
+	private AdminService adminService;
+	
 
 
 	@RequestMapping("/")
@@ -47,32 +54,39 @@ public class HomeController {
 
 	 @RequestMapping("/welcome")
 	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal ) {
+		if(principal == null){
+			return "login";
+		}
 		 String name = principal.getName();
-		 System.out.println(name);
 			
-		   //model.addAttribute("user",userService.getUserByUserName(name));
+		
 		  //  model.addAttribute("userproduct", productService.getAllItems(userService.getUserByName(name).getId()));
 
 	        if (request.isUserInRole("ROLE_VENDOR")) {
 	        	
-	        	//model.addAttribute("user",vendorService.getUserByUserName(name));
+	        model.addAttribute("vendor",vendorService.getVendorByUserName(name));
+	        model.addAttribute("vendorProducts", productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId()));
 	            return "VendorPage";
 	        }
 	        else if (request.isUserInRole("ROLE_ADMIN")) {
 	        		
-	            return "welcome";
+	 
+	        model.addAttribute("admin",adminService.getAdminByUserName(name));
+	        	
+	        	
+	            return "AdminPage";
 	        }
 	        else{
+	        	
+	        	model.addAttribute("customer",customerService.getCustomerByUserName(name));
 	        return "CustomerPage";
 	        }
 	 }
 	
 	 @ModelAttribute
 		public void init(Model model){
-		 List<Product> products = productService.findApprovedProducts();
-			model.addAttribute("products", products);
-			List<Category> category = categoryService.findAll();
-			model.addAttribute("categories", category);
+			model.addAttribute("products", productService.findApprovedProducts());
+			model.addAttribute("categories", categoryService.findAll());
 		}
 
 

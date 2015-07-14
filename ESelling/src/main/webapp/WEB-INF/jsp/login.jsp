@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content=
@@ -10,19 +11,14 @@
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-
-<section>
-		<div class="jumbotron">
-			<div class="container">	
+<div class="container">
 				<c:if test="${not empty error}">
 <div class="alert alert-danger"  >
 <spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 </div>
 </c:if>
-			</div>
-			
-		</div>
-	</section>
+</div>
+		
 <section class="container">
 <form action="<c:url value="/j_spring_security_check"></c:url>"  class="form-horizontal" method="post">
 <fieldset>

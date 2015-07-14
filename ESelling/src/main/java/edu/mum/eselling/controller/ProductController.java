@@ -43,7 +43,7 @@ public class ProductController {
 		
 	//	model.addAttribute("userItem", itemService.getAllItems(Long.parseLong(userId)));
 
-		return "ProductForm";
+		return "addProduct";
 	}
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class ProductController {
 	
 		if(result.hasErrors()){
 			model.addAttribute("categories", categoryService.findAll());
-			return "ProductForm";
+			return "addProduct";
 		}
 		MultipartFile itemImage = product.getProductImage();
 	
@@ -88,7 +88,7 @@ public class ProductController {
 		
        // model.addAttribute("success" ,"item has been succesfully added to Your List");
 		model.addAttribute("Vendor",vendor);
-		model.addAttribute("VendorItem", productService.getAllProducts(Long.parseLong(id)));
+		model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
        
 		return "welcome";
 
