@@ -76,6 +76,16 @@ public class LogInController {
 		{
 			return "CustomerSignUp";
 		}
+		
+   List<Credentials> userName = credentialService.getAll();
+		customer.getCredentials().getUsername().toLowerCase();
+		for(Credentials c : userName){
+			if(c.getUsername().equals(customer.getCredentials().getUsername())){
+			  model.addAttribute("username","True");
+			  return "CustomerSignUp";
+			}
+		}
+		
 		System.out.println(customer.getCredentials().getPassword());
 		customer.getCredentials().setPassword(getHashPassword(customer.getCredentials().getPassword()));
 		customer.setPassword(getHashPassword(customer.getCredentials().getPassword()));
@@ -98,11 +108,14 @@ public class LogInController {
 		{
 			return "VendorSignUp";
 		}
+		vendor.getCredentials().getUsername().toLowerCase();
+		
 		List<Credentials> userName = credentialService.getAll();
 		
 		for(Credentials c : userName){
 			if(c.getUsername().equals(vendor.getCredentials().getUsername())){
-			  model.addAttribute("userName","True");
+			  model.addAttribute("username","True");
+			  return "VendorSignUp";
 			}
 		}
 		
