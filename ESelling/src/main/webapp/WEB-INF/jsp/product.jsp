@@ -105,10 +105,10 @@
 						
 
 						<p><strong><fmt:formatNumber value="${product.unitPrice}" type="currency"/></strong></p>
-						<form:form action="/cart/checkout" method="get">
+						<form:form action="/cart/checkout" method="get" modelAttribute="orderDetail">
 						<p><strong>Quantity to add</strong>
 						
-						<select name="productQuantity">
+						<select path="quantity">
 							<option value="1">1</option>
 							<option value="2">2</option>
 						</select>
