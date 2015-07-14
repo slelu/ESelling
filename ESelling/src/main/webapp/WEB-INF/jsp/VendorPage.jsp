@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 				<c:if test="${not empty addproduct}">
-<div class="alert alert-danger"  >
+<div class="alert alert-success"  >
 <spring:message code="addedproductsuccessfully"/><br />
 </div>
 </c:if>

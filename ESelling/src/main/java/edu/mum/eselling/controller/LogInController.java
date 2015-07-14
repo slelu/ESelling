@@ -1,6 +1,7 @@
 package edu.mum.eselling.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -12,10 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.mum.eselling.domain.Credentials;
 import edu.mum.eselling.domain.Customer;
 import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.CategoryService;
+import edu.mum.eselling.service.CredentialsService;
 import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
@@ -36,6 +40,9 @@ public class LogInController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private CredentialsService credentialService;
 
 	
 	
@@ -52,6 +59,8 @@ public class LogInController {
 		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(Model model) {
+		
+		
 	return "redirect:/welcome";
 	}
 	
@@ -62,7 +71,7 @@ public class LogInController {
 	}
 	
 	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.POST)
-	public String processCustomerSignUp(@Valid @ModelAttribute Customer customer,BindingResult result ,Model model){
+	public String processCustomerSignUp(@Valid @ModelAttribute Customer customer,BindingResult result ,Model model,RedirectAttributes redirectAttributes){
 		if(result.hasErrors())
 		{
 			return "CustomerSignUp";
@@ -72,9 +81,9 @@ public class LogInController {
 		customer.setPassword(getHashPassword(customer.getCredentials().getPassword()));
 		
 		CustomerService.addNewCustomer(customer);
-		model.addAttribute("successful","true");
+		redirectAttributes.addFlashAttribute("successful","true");
 		
-		return "welcome";
+		return "redirect:/welcome";
 	}
 	@RequestMapping(value="/VendorSignUp", method=RequestMethod.GET)
 	public String vendorSignup(@ModelAttribute Vendor vendor){
@@ -84,18 +93,26 @@ public class LogInController {
 	}
 	
 	@RequestMapping(value="/VendorSignUp", method=RequestMethod.POST)
-	public String processVendorSignUp(@Valid @ModelAttribute Vendor vendor,BindingResult result,Model model){
+	public String processVendorSignUp(@Valid @ModelAttribute Vendor vendor,BindingResult result,Model model,RedirectAttributes redirectAttributes){
 		if(result.hasErrors())
 		{
 			return "VendorSignUp";
 		}
+		List<Credentials> userName = credentialService.getAll();
+		
+		for(Credentials c : userName){
+			if(c.getUsername().equals(vendor.getCredentials().getUsername())){
+			  model.addAttribute("userName","True");
+			}
+		}
+		
 		vendor.getCredentials().setPassword(getHashPassword(vendor.getCredentials().getPassword()));
 		vendor.setPassword(getHashPassword(vendor.getCredentials().getPassword()));
 		
-		model.addAttribute("successful","true");
+		redirectAttributes.addFlashAttribute("successful","true");
 		vendorService.addNewVendor(vendor);
 		
-		return "welcome";
+		return "redirect:/welcome";
 	}
 	
 	
@@ -104,7 +121,7 @@ public class LogInController {
 	public void init(Model model){
 		
 		Integer[] months = new Integer[] { 1, 2, 3,4,5,6,7,8,9,10,11,12 };
-		Integer[] years = new Integer[] { 2010, 2011, 2012,2013,2014,2015,2016,2017,2018,2019,2020};
+		Integer[] years = new Integer[] {2015,2016,2017,2018,2019,2020,2021};
 		String[] states = new String[] {"OH","VA","OK","OR","SC","NY","IA","MD","NH","NV","LA","FL","TX","UT"};
 		String[] creditType= new String[]{"Visa","MasterCard"};
 		Arrays.asList(months);
@@ -120,8 +137,6 @@ public class LogInController {
 		
 	}
 	
-	
- 
 		  
 		 public String getHashPassword(String password) {  
 		  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  

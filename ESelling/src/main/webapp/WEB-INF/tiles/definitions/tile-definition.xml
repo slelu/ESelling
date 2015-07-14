@@ -84,7 +84,7 @@
 	<definition name="myProducts" extends="baseLayout">
 		<put-attribute name="title" value="Payment" />
 		<!-- <put-attribute name="heading" value="Payment" /> -->
-		<put-attribute name="tagline" value="Enter credit card details" />
+		<!-- <put-attribute name="tagline" value="Enter credit card details" /> -->
 		<put-attribute name="body" value="/WEB-INF/jsp/myProducts.jsp" />
 	</definition> 	
 	 	

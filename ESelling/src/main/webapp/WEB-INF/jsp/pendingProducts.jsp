@@ -27,7 +27,7 @@
 		</div>	
 		<div class="container">
 				<c:if test="${not empty noproduct}">
-<div class="alert alert-danger"  >
+<div class="alert alert-success"  >
 <spring:message code="NoProductstobeApproved"/><br />
 </div>
 </c:if>

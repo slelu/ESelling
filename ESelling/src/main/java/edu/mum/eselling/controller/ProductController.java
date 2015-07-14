@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.eselling.domain.Category;
 import edu.mum.eselling.domain.Product;
@@ -45,7 +46,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,Model model,Principal principal) {
+	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,
+			Model model,Principal principal ,RedirectAttributes redirectAttributes) {
 	
 		if(result.hasErrors()){
 			model.addAttribute("categories", categoryService.findAll());
@@ -84,13 +86,13 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 		
 		vendorService.saveVendor(vendor);
 		
-        model.addAttribute("addproduct" ,"true");
-		model.addAttribute("vendor",vendor);
+		redirectAttributes.addFlashAttribute("addproduct" ,"true");
+		redirectAttributes.addFlashAttribute("vendor",vendor);
 		//model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
        
 		
 		//model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
-		return "VendorPage";
+		return "redirect:/vendor";
 
 	}
 	

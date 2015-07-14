@@ -44,7 +44,7 @@ public class HomeController {
 	
 
 
-	@RequestMapping("/")
+	@RequestMapping(value={"/","/welcome"})
 	public String welcome(Model model) {
 
 		return "welcome";
@@ -52,13 +52,13 @@ public class HomeController {
 
 
 
-	 @RequestMapping("/welcome")
+	 @RequestMapping("/loginSuccess")
 	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal ) {
 		if(principal == null){
 			return "login";
 		}
 		 String name = principal.getName();
-			
+			System.out.println(name);
 		
 		  //  model.addAttribute("userproduct", productService.getAllItems(userService.getUserByName(name).getId()));
 

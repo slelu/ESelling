@@ -13,7 +13,7 @@ import edu.mum.eselling.domain.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-     @Query("SELECT p FROM Product p WHERE p.category.categoryId = :categoryId")
+     @Query("SELECT p FROM Product p WHERE p.category.categoryId = :categoryId and p.productApproval = 'approved'")
 	public List<Product> findProductsByCategory(
 			@Param(value = "categoryId") Long categoryId);
 			

@@ -219,7 +219,6 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form,
 	fieldset, input, textarea, p, blockquote, th, td, img, span {
 	margin: 0;
 	padding: 0;
-	border: none;
 }
 
 ul {
@@ -497,7 +496,6 @@ a.block_big {
 
 #product {
 	list-style-type: none;
-	display: inline-block;
 	vertical-align: top;
 	overflow: hidden;
 	zoom: 1.0;
@@ -505,7 +503,6 @@ a.block_big {
 	margin: 0 12px 12px 0;
 	border: 1px solid #cfcece;
 	padding: 15px;
-	width: 188px;
 }
 
 

@@ -36,6 +36,14 @@ public class VendorController {
 		return "myProducts";
 	}
 	
+	@RequestMapping("/vendor")
+	public String getVendorPage(Model model) {
+		
+		return "VendorPage";
+	}
+	
+	
+	
 	@ModelAttribute
 	public void init(Model model,Principal principal){
 	    model.addAttribute("categories", categoryService.findAll());

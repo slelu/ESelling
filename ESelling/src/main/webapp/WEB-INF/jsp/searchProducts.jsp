@@ -19,7 +19,13 @@
 	
 
 	<!--Main Content goes here --->
-	
+<div class="container">
+				<c:if test="${not empty nosearchproduct}">
+<div class="alert alert-success"  >
+<spring:message code="successful"/><br />
+</div>
+</c:if>
+</div>	
 	<div class="container">
 				<c:if test="${not empty admin}">
 <div class="container">
@@ -56,7 +62,7 @@
 		<ul style="background-color:white;">
 			<li><strong>Hello ${vendor.firstName} </strong></li>
 			
-			<li><a href=" <spring:url value="/addProduct/?id=${vendor.id}" />" >Post New Product </a> </li>
+			<li><a href=" <spring:url value="/addProduct" />" >Post New Product </a> </li>
 			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
  	       <li><a href=" <spring:url value="#" />" >View My Products</a> </li>
  	       <li><a href="#"><pre id="separator">   |   </pre></a></li>

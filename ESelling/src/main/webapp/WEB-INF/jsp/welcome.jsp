@@ -23,7 +23,7 @@
 	
 	<div class="container">
 				<c:if test="${not empty successful}">
-<div class="alert alert-danger"  >
+<div class="alert alert-success"  >
 <spring:message code="successful"/><br />
 </div>
 </c:if>
