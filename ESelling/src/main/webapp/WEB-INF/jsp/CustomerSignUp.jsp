@@ -14,10 +14,17 @@
 <body>
 <div class="container">
 				<c:if test="${not empty username}">
-<div class="alert alert-error"  >
+<div class="alert alert-danger"  >
 <spring:message code="duplicateusername"/><br />
-</div>
+</div> 
 </c:if>
+
+<c:if test="${not empty wrongCreditCard}">
+ <div class="alert alert-danger"  >
+<spring:message code="wrongcreditcard"/><br />
+ </div>
+</c:if>
+
 </div>
 
 	<section class="container">

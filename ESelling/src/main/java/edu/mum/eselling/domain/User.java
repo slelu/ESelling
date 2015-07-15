@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -28,9 +30,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 	private String firstName;
     @NotEmpty(message="{User.LastName}")
 	private String lastName;
+    @Email
     @NotEmpty(message="{User.Email}")
 	private String email;
     @NotEmpty(message="{User.Phone}")
+    @Pattern(regexp="\\d{10}",message="{Pattern.phone}")
 	private String phone;
     
     private String password;

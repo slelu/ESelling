@@ -53,12 +53,12 @@ public class ProductController {
 			model.addAttribute("categories", categoryService.findAll());
 			return "addProduct";
 		}
-		MultipartFile itemImage = product.getProductImage();
+		MultipartFile productImage = product.getProductImage();
 	
 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 
-		if (itemImage != null && !itemImage.isEmpty()) {
+		if (productImage != null && !productImage.isEmpty()) {
 			System.out.println(rootDirectory);
 
 			try {
@@ -66,8 +66,8 @@ public class ProductController {
 
 product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".png");
 	//product.setProductPath(rootDirectory + "\\resources\\images\\" + product.getProductName()+ ".png");
-				itemImage.transferTo(new File(
-								 "E:\\resources\\images\\" + product.getProductName()
+                productImage.transferTo(new File(
+                		rootDirectory + "\\resources\\images\\" +  product.getProductName()
 								+ ".png"));
 				
 			}
@@ -77,21 +77,17 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 				
 		}	
 		product.setApproval("pending");
-		//Category cat = categoryService.find(product.getCategory().getCategoryId());
+		Category cat = categoryService.find(product.getCategory().getCategoryId());
 		
-		//cat.addProducts(product);
+		cat.addProducts(product);
 		Vendor vendor=vendorService.getVendorByUserName(principal.getName());
-		//Vendor vendor=vendorService.getVendor(Long.parseLong(id));
 		vendor.addProducts(product);
 		
 		vendorService.saveVendor(vendor);
 		
 		redirectAttributes.addFlashAttribute("addproduct" ,"true");
 		redirectAttributes.addFlashAttribute("vendor",vendor);
-		//model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
-       
 		
-		//model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
 		return "redirect:/vendor";
 
 	}
@@ -104,9 +100,10 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 	}
 	
 	 @ModelAttribute
-	 public void init(Model model){
+	 public void init(Model model,Principal principal){
 		 model.addAttribute("products",productService.findApprovedProducts());
-		 model.addAttribute("categories", categoryService.findAll());	 
+		 model.addAttribute("categories", categoryService.findAll());	
+		 model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
 	 }
 
 }

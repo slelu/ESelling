@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -20,6 +22,7 @@ public class Address implements Serializable {
 	@NotEmpty(message="{User.State}")
 	private String state;
 	@NotEmpty(message="{User.ZipCode}")
+    @Pattern(regexp="^\\d{5}(-\\d{4})?$",message="{Pattern.zipcode}")
 	private String zipcode;
 
 	public long getAddressId() {

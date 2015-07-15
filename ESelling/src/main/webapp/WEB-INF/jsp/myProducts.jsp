@@ -11,27 +11,19 @@
 </head>
 <body>
 <div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${vendor.firstName} </strong></li>
-			
-			<li><a href=" <spring:url value="/addProduct" />" >Post New Product </a> </li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >View My Products</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
+				<c:if test="${not empty emptylist}">
+<div class="alert alert-success"  >
+<spring:message code="novendorproducts"/><br />
+</div>
+</c:if>
+</div>
 <div id="main">
 		<div id="products">
 			<section class="container">
 				<div class="row">
 				<c:forEach items="${vendorProducts}" var="product">
 					<div class="col-md-5">
-						<img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="image"  style="float: right; height:246px; width=190px;"/>  
+						<img src="<c:url value="../${product.productPath}"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;">  
 					</div>
 
 					<div class="col-md-5">

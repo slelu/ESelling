@@ -12,21 +12,7 @@
 </head>
 
 <body>
-	<div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${vendor.firstName} </strong></li>
-			
-			<li><a href=" <spring:url value="/addProduct" />" >Post New Product </a> </li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="/myProducts" />" >View My Products</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
+	
 	<section class="container">
 		<form:form  modelAttribute="product" class="form-horizontal" enctype="multipart/form-data">
 			<fieldset>

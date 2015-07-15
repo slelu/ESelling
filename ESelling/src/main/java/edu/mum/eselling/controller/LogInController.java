@@ -1,8 +1,11 @@
 package edu.mum.eselling.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.mum.eselling.domain.Credentials;
 import edu.mum.eselling.domain.Customer;
 import edu.mum.eselling.domain.Vendor;
+import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.CredentialsService;
 import edu.mum.eselling.service.CustomerService;
@@ -30,7 +34,7 @@ import edu.mum.eselling.service.VendorService;
 public class LogInController {
 	
 	@Autowired
-	CustomerService CustomerService;
+	CustomerService customerService;
 	
 	@Autowired
 	VendorService vendorService;
@@ -43,6 +47,9 @@ public class LogInController {
 	
 	@Autowired
 	private CredentialsService credentialService;
+
+	@Autowired
+	private AdminService adminService;
 
 	
 	
@@ -58,108 +65,51 @@ public class LogInController {
 	}
 		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
-		
-		
+	public String logout(Model model, HttpSession session) {
+	//	SecurityContextHolder.getContext().setAuthentication(null);
+		session.invalidate();
 	return "redirect:/welcome";
 	}
 	
-	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.GET)
-	public String customerSignup(@ModelAttribute Customer customer){
-			
-		return "CustomerSignUp";
-	}
 	
-	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.POST)
-	public String processCustomerSignUp(@Valid @ModelAttribute Customer customer,BindingResult result ,Model model,RedirectAttributes redirectAttributes){
-		if(result.hasErrors())
-		{
-			return "CustomerSignUp";
-		}
+	 @RequestMapping("/loginSuccess")
+	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal, HttpSession session ) {
+		 		
+		 session.setAttribute("name", principal.getName());
+		 String name = principal.getName();
 		
-   List<Credentials> userName = credentialService.getAll();
-		customer.getCredentials().getUsername().toLowerCase();
-		for(Credentials c : userName){
-			if(c.getUsername().equals(customer.getCredentials().getUsername())){
-			  model.addAttribute("username","True");
-			  return "CustomerSignUp";
-			}
-		}
-		
-		System.out.println(customer.getCredentials().getPassword());
-		customer.getCredentials().setPassword(getHashPassword(customer.getCredentials().getPassword()));
-		customer.setPassword(getHashPassword(customer.getCredentials().getPassword()));
-		
-		CustomerService.addNewCustomer(customer);
-		redirectAttributes.addFlashAttribute("successful","true");
-		
-		return "redirect:/welcome";
-	}
-	@RequestMapping(value="/VendorSignUp", method=RequestMethod.GET)
-	public String vendorSignup(@ModelAttribute Vendor vendor){
-		
-			
-		return "VendorSignUp";
-	}
-	
-	@RequestMapping(value="/VendorSignUp", method=RequestMethod.POST)
-	public String processVendorSignUp(@Valid @ModelAttribute Vendor vendor,BindingResult result,Model model,RedirectAttributes redirectAttributes){
-		if(result.hasErrors())
-		{
-			return "VendorSignUp";
-		}
-		vendor.getCredentials().getUsername().toLowerCase();
-		
-		List<Credentials> userName = credentialService.getAll();
-		
-		for(Credentials c : userName){
-			if(c.getUsername().equals(vendor.getCredentials().getUsername())){
-			  model.addAttribute("username","True");
-			  return "VendorSignUp";
-			}
-		}
-		
-		vendor.getCredentials().setPassword(getHashPassword(vendor.getCredentials().getPassword()));
-		vendor.setPassword(getHashPassword(vendor.getCredentials().getPassword()));
-		
-		redirectAttributes.addFlashAttribute("successful","true");
-		vendorService.addNewVendor(vendor);
-		
-		return "redirect:/welcome";
-	}
-	
+		  //  model.addAttribute("userproduct", productService.getAllItems(userService.getUserByName(name).getId()));
+
+	        if (request.isUserInRole("ROLE_VENDOR")) {
+	        	
+	        model.addAttribute("vendor",vendorService.getVendorByUserName(name));
+	        model.addAttribute("vendorProducts", productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId()));
+	        
+	            return "VendorPage";
+	        }
+	        else if (request.isUserInRole("ROLE_ADMIN")) {
+	        		
+	 
+	        model.addAttribute("admin",adminService.getAdminByUserName(name));
+	       	
+	        	
+	            return "AdminPage";
+	        }
+	        else{
+	        	
+	        	model.addAttribute("customer",customerService.getCustomerByUserName(name));
+	        	
+	        return "CustomerPage";
+	        }
+	 }
 	
 	
 	@ModelAttribute
 	public void init(Model model){
-		
-		Integer[] months = new Integer[] { 1, 2, 3,4,5,6,7,8,9,10,11,12 };
-		Integer[] years = new Integer[] {2015,2016,2017,2018,2019,2020,2021};
-		String[] states = new String[] {"OH","VA","OK","OR","SC","NY","IA","MD","NH","NV","LA","FL","TX","UT"};
-		String[] creditType= new String[]{"Visa","MasterCard"};
-		Arrays.asList(months);
-		Arrays.asList(years);
-		Arrays.asList(states);
-		Arrays.asList(creditType);
-		model.addAttribute("months",months);
-		model.addAttribute("years",years);
-		model.addAttribute("states",states);
-		model.addAttribute("creditType",creditType);	
 		model.addAttribute("categories",categoryService.findAll());
 		model.addAttribute("products", productService.findApprovedProducts());
-		
 	}
 	
-		  
-		 public String getHashPassword(String password) {  
-		  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  
-		  String hashedPassword = passwordEncoder.encode(password);  
-		  
-		  System.out.println(hashedPassword);  
-		  return hashedPassword;  
-		 }  
-		   
 	
-
 	
 }
