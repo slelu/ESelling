@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.eselling.domain.Category;
+import edu.mum.eselling.domain.OrderDetail;
 import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.CategoryService;
@@ -104,7 +105,8 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 	 @ModelAttribute
 	 public void init(Model model){
 		 model.addAttribute("products",productService.findApprovedProducts());
-		 model.addAttribute("categories", categoryService.findAll());	 
+		 model.addAttribute("categories", categoryService.findAll());	
+		 model.addAttribute("orderDetail", new OrderDetail());
 	 }
 
 }

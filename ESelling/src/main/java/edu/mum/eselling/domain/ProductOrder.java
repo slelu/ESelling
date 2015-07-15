@@ -76,7 +76,15 @@ public class ProductOrder implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-    public List<OrderDetail> getOrderDetails() {
+    public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public List<OrderDetail> getOrderDetails() {
         return this.orderDetails;
     }
 	
@@ -87,6 +95,10 @@ public class ProductOrder implements Serializable {
         }
         return total;
     }
+	
+	public void clear(){
+		
+	}
 	
 	/**
      * Update the order details and update the total price. If the quantity is 0 or less the order detail is removed from the list.

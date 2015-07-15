@@ -4,9 +4,9 @@ package edu.mum.eselling.controller;
 
 
 import java.security.Principal;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.mum.eselling.domain.Category;
-import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.CustomerService;
@@ -53,8 +51,8 @@ public class HomeController {
 
 
 	 @RequestMapping("/welcome")
-	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal ) {
-		if(principal == null){
+	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal, HttpSession session ) {
+		if(principal == null ){
 			return "login";
 		}
 		 String name = principal.getName();
@@ -79,6 +77,7 @@ public class HomeController {
 	        else{
 	        	
 	        	model.addAttribute("customer",customerService.getCustomerByUserName(name));
+	        	session.setAttribute("customer", customerService.getCustomerByUserName(name));
 	        return "CustomerPage";
 	        }
 	 }

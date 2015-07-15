@@ -72,7 +72,7 @@
 						
 						<li><a href="#"><pre id="separator">   |   </pre></a></li>
 						
-						<li><a href="#"><img alt="" src="../resources/images/cart.png">${cart.grandTotal}</a></li>
+						<li><a href="<c:url value="/cart/checkout"/>"><img alt="" src="../resources/images/cart.png">${cart.numberOfProducts} Products</a></li>
 					</ul>
 					<br style="clear: left" />
 				</div>
@@ -99,22 +99,26 @@
 						</p>
 
 						<p>
-							<strong>Available units in stock </strong> :
-							${product.unitsInStock}
+						<c:if test="${product.unitsInStock > 0}">
+							Available in stock
+						</c:if>
+						<c:if test="${product.unitsInStock <= 0}">
+							Out of stock
+						</c:if>
 						</p>
 						
 
-						<p><strong><fmt:formatNumber value="${product.unitPrice}" type="currency"/></strong></p>
-						<form:form action="/cart/checkout" method="get" modelAttribute="orderDetail">
-						<p><strong>Quantity to add</strong>
+						<p><strong><fmt:formatNumber value="${product.unitPrice}" type="currency"/></strong></p>						
 						
-						<select path="quantity">
-							<option value="1">1</option>
-							<option value="2">2</option>
-						</select>
-						</p>
-						<p>
-							<a href="<c:url value="/cart/add/${product.productId}"/>" class="btn btn-warning btn-large"> <span
+						<%-- If product is out of stock, disable the link
+							A better solution would have been provided by javascript
+						<c:if test="${product.unitsInStock <= 0}">
+							<c:out value="disabled='disabled'"/></c:if> 
+							
+							--%>
+						
+						<p >
+							<a href="<c:url value="/cart/add/${product.productId}"/> " class="btn btn-warning btn-large"> <span
 								class="glyphicon-shopping-cart glyphicon"></span> <spring:message code="product.addtocart"/>
 							</a> 
 							<a href="<spring:url value="/cart/checkout" />" class="btn btn-default">
@@ -127,7 +131,7 @@
 							</a>
 
 						</p>
-				</form:form>
+			
 					</div>
 				</div>
 			</section>

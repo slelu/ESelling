@@ -1,11 +1,19 @@
 package edu.mum.eselling.controller;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import edu.mum.eselling.domain.Cart;
 import edu.mum.eselling.domain.ProductOrder;
@@ -22,12 +30,45 @@ public class CheckoutController {
 	private OrderService orderService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public void show(Model model) {
+	public void show(Model model, Principal principal, HttpSession session) {
+		if (principal == null){
+			System.out.println("Session not set");
+		}else{
+			
+			System.out.println("Session set");
+		}
 		/*
 		 * Account account = (Account)
 		 * session.getAttribute(LoginController.ACCOUNT_ATTRIBUTE);
 		 */
-		ProductOrder order = this.orderService.createOrder(this.cart);
-		model.addAttribute("order", order);
+		ProductOrder productOrder = this.orderService.createOrder(this.cart, principal);
+//		session.setAttribute("productOrder", productOrder);
+		model.addAttribute("productOrder", productOrder);
+		
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, params = "update")
+    public String update(@ModelAttribute ProductOrder productOrder) {
+        productOrder.updateOrderDetails();
+        return "cart/checkout";
+    }
+	
+	@RequestMapping(method = RequestMethod.POST, params = "order")
+    public String checkout(SessionStatus status, @Validated @ModelAttribute ProductOrder productOrder, BindingResult errors) {
+        if (errors.hasErrors()) {
+            return "cart/checkout";
+        } else {
+            this.orderService.store(productOrder);
+            status.setComplete(); //remove order from session
+            this.cart.clear(); // clear the cart
+            return "redirect:/welcome";
+        }
+    }
+	
+	@RequestMapping(method = RequestMethod.POST, params = "cancel")
+    public String cancel(SessionStatus status, @ModelAttribute ProductOrder productOrder, HttpSession session) {
+		status.setComplete(); //remove order from session
+        this.cart.clear(); // clear the cart
+        return "redirect:/welcome";
+    }
 }

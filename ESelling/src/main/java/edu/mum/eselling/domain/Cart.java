@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -19,37 +17,38 @@ public class Cart implements Serializable {
 
 	private Map<Product, Integer> cartProducts = new HashMap<Product, Integer>();
 	private BigDecimal grandTotal;
-
+	private int numberOfProducts;
+	
 	public Cart() {
 		super();
 		grandTotal = new BigDecimal(0);
+		numberOfProducts = 0;
 	}
 
     public Map<Product, Integer> getProducts() {
         return Collections.unmodifiableMap(this.cartProducts);
     }
 
-    public void addProduct(Product product, Integer productQuantity) {
+    
+    
+    public int getNumberOfProducts() {
+		return numberOfProducts;
+	}
+
+	public void addProduct(Product product) {
         if (this.cartProducts.containsKey(product)) {
-        	/*System.out.println("Key contained");
             int quantity = this.cartProducts.get(product);
-            quantity++;*/
-            this.cartProducts.put(product, productQuantity);
-            grandTotal = product.getUnitPrice().multiply(new BigDecimal(productQuantity));
+            quantity++;
+            this.cartProducts.put(product, quantity);
+            numberOfProducts += 1;
+            grandTotal = grandTotal.add(product.getUnitPrice().multiply(new BigDecimal(1)));
         } else {
-        	/*System.out.println("Key not contained");
+        	System.out.println("Key not contained");
             this.cartProducts.put(product, 1);
-            grandTotal = grandTotal.add(product.getUnitPrice().multiply(new BigDecimal(1)));*/
-        	this.cartProducts.put(product, productQuantity);
-            grandTotal = product.getUnitPrice().multiply(new BigDecimal(productQuantity));
+            grandTotal = grandTotal.add(product.getUnitPrice().multiply(new BigDecimal(1)));
+            numberOfProducts += 1;
         }
         
-        Iterator it = cartProducts.entrySet().iterator();   //line 1
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(((Product)pair.getKey()).getProductName() + " = " + pair.getValue());
-            /*it.remove();*/
-           }
     }
 
     public void removeProduct(Product product) {
@@ -58,6 +57,8 @@ public class Cart implements Serializable {
 
     public void clear() {
         this.cartProducts.clear();
+        this.setGrandTotal(new BigDecimal(0));
+        this.numberOfProducts = 0;
     }
 
     @Override

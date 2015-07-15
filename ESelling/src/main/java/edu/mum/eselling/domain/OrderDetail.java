@@ -59,4 +59,24 @@ public class OrderDetail implements Serializable{
         }
         return BigDecimal.ZERO;
     }
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        OrderDetail other = (OrderDetail) object;
+
+        return (this.id == other.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return new org.apache.commons.lang.builder.HashCodeBuilder().append(this.id).toHashCode();
+	}
+	
+	
 }

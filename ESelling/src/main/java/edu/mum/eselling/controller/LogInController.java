@@ -2,6 +2,7 @@ package edu.mum.eselling.controller;
 
 import java.util.Arrays;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,10 @@ public class LogInController {
 	}
 		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
-	return "redirect:/welcome";
+	public String logout(Model model, HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:/welcome";
 	}
 	
 	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.GET)
