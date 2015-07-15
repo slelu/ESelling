@@ -12,6 +12,20 @@
 </head>
 
 <body>
+<div class="container">
+				<c:if test="${not empty username}">
+<div class="alert alert-danger"  >
+<spring:message code="duplicateusername"/><br />
+</div> 
+</c:if>
+
+<c:if test="${not empty wrongCreditCard}">
+ <div class="alert alert-danger"  >
+<spring:message code="wrongcreditcard"/><br />
+ </div>
+</c:if>
+
+</div>
 
 	<section class="container">
 	<form:form modelAttribute="customer" class="form-horizontal" method="POST" enctype="utf8">

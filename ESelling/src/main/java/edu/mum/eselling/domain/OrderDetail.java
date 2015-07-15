@@ -13,9 +13,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class OrderDetail implements Serializable{
 	
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 9029113477551790189L;
 
 	@Id

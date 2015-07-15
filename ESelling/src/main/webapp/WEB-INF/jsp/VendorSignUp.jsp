@@ -11,7 +11,13 @@
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-
+<div class="container">
+				<c:if test="${not empty username}">
+<div class="alert alert-error"  >
+<spring:message code="duplicateusername"/><br />
+</div>
+</c:if>
+</div>
 	<section class="container">
 	<form:form modelAttribute="vendor"  class="form-horizontal" method="POST" enctype="utf8">
 		<fieldset>

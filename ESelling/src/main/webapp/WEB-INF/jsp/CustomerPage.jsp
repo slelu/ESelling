@@ -10,17 +10,7 @@
 <title></title>
 </head>
 <body>
-<div class="container">
-			<div class="menu">
-			<ul>
-			
-			<li><strong>Hello ${customer.firstName}</strong></li>	
-			<li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
-			<li><a href="#"><pre id="separator">   |   </pre></a></li>	
-	       </ul>	
-				</div>
-				</div>
-	
+
 	<div id="main">
 
 		<div id="products">

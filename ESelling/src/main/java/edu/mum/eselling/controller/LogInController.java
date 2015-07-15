@@ -1,7 +1,13 @@
 package edu.mum.eselling.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
+import java.util.List;
 
+<<<<<<< HEAD
+=======
+import javax.servlet.http.HttpServletRequest;
+>>>>>>> branch 'master' of https://github.com/slelu/ESelling.git
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,10 +19,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.mum.eselling.domain.Credentials;
 import edu.mum.eselling.domain.Customer;
 import edu.mum.eselling.domain.Vendor;
+import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
+import edu.mum.eselling.service.CredentialsService;
 import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
@@ -27,7 +37,7 @@ import edu.mum.eselling.service.VendorService;
 public class LogInController {
 	
 	@Autowired
-	CustomerService CustomerService;
+	CustomerService customerService;
 	
 	@Autowired
 	VendorService vendorService;
@@ -37,6 +47,12 @@ public class LogInController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private CredentialsService credentialService;
+
+	@Autowired
+	private AdminService adminService;
 
 	
 	
@@ -53,88 +69,52 @@ public class LogInController {
 		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(Model model, HttpSession session) {
-		
+
+	//	SecurityContextHolder.getContext().setAuthentication(null);
 		session.invalidate();
-		return "redirect:/welcome";
+	return "redirect:/welcome";
+
 	}
 	
-	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.GET)
-	public String customerSignup(@ModelAttribute Customer customer){
-			
-		return "CustomerSignUp";
-	}
 	
-	@RequestMapping(value="/CustomerSignUp", method=RequestMethod.POST)
-	public String processCustomerSignUp(@Valid @ModelAttribute Customer customer,BindingResult result ,Model model){
-		if(result.hasErrors())
-		{
-			return "CustomerSignUp";
-		}
-		System.out.println(customer.getCredentials().getPassword());
-		customer.getCredentials().setPassword(getHashPassword(customer.getCredentials().getPassword()));
-		customer.setPassword(getHashPassword(customer.getCredentials().getPassword()));
+	 @RequestMapping("/loginSuccess")
+	    public String defaultAfterLogin(HttpServletRequest request,Model model ,Principal principal, HttpSession session ) {
+		 		
+		 session.setAttribute("name", principal.getName());
+		 String name = principal.getName();
 		
-		CustomerService.addNewCustomer(customer);
-		model.addAttribute("successful","true");
-		
-		return "welcome";
-	}
-	@RequestMapping(value="/VendorSignUp", method=RequestMethod.GET)
-	public String vendorSignup(@ModelAttribute Vendor vendor){
-		
-			
-		return "VendorSignUp";
-	}
-	
-	@RequestMapping(value="/VendorSignUp", method=RequestMethod.POST)
-	public String processVendorSignUp(@Valid @ModelAttribute Vendor vendor,BindingResult result,Model model){
-		if(result.hasErrors())
-		{
-			return "VendorSignUp";
-		}
-		vendor.getCredentials().setPassword(getHashPassword(vendor.getCredentials().getPassword()));
-		vendor.setPassword(getHashPassword(vendor.getCredentials().getPassword()));
-		
-		model.addAttribute("successful","true");
-		vendorService.addNewVendor(vendor);
-		
-		return "welcome";
-	}
-	
+		  //  model.addAttribute("userproduct", productService.getAllItems(userService.getUserByName(name).getId()));
+
+	        if (request.isUserInRole("ROLE_VENDOR")) {
+	        	
+	        model.addAttribute("vendor",vendorService.getVendorByUserName(name));
+	        model.addAttribute("vendorProducts", productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId()));
+	        
+	            return "VendorPage";
+	        }
+	        else if (request.isUserInRole("ROLE_ADMIN")) {
+	        		
+	 
+	        model.addAttribute("admin",adminService.getAdminByUserName(name));
+	       	
+	        	
+	            return "AdminPage";
+	        }
+	        else{
+	        	
+	        	model.addAttribute("customer",customerService.getCustomerByUserName(name));
+	        	
+	        return "CustomerPage";
+	        }
+	 }
 	
 	
 	@ModelAttribute
 	public void init(Model model){
-		
-		Integer[] months = new Integer[] { 1, 2, 3,4,5,6,7,8,9,10,11,12 };
-		Integer[] years = new Integer[] { 2010, 2011, 2012,2013,2014,2015,2016,2017,2018,2019,2020};
-		String[] states = new String[] {"OH","VA","OK","OR","SC","NY","IA","MD","NH","NV","LA","FL","TX","UT"};
-		String[] creditType= new String[]{"Visa","MasterCard"};
-		Arrays.asList(months);
-		Arrays.asList(years);
-		Arrays.asList(states);
-		Arrays.asList(creditType);
-		model.addAttribute("months",months);
-		model.addAttribute("years",years);
-		model.addAttribute("states",states);
-		model.addAttribute("creditType",creditType);	
 		model.addAttribute("categories",categoryService.findAll());
 		model.addAttribute("products", productService.findApprovedProducts());
-		
 	}
 	
 	
- 
-		  
-		 public String getHashPassword(String password) {  
-		  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  
-		  String hashedPassword = passwordEncoder.encode(password);  
-		  
-		  System.out.println(hashedPassword);  
-		  return hashedPassword;  
-		 }  
-		   
-	
-
 	
 }

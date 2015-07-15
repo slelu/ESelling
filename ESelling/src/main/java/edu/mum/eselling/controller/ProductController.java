@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.eselling.domain.Category;
 import edu.mum.eselling.domain.OrderDetail;
@@ -46,18 +47,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,Model model,Principal principal) {
+	public String saveProduct(@Valid @ModelAttribute Product product,BindingResult result,HttpServletRequest request ,
+			Model model,Principal principal ,RedirectAttributes redirectAttributes) {
 	
 		if(result.hasErrors()){
 			model.addAttribute("categories", categoryService.findAll());
 			return "addProduct";
 		}
-		MultipartFile itemImage = product.getProductImage();
+		MultipartFile productImage = product.getProductImage();
 	
 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 
-		if (itemImage != null && !itemImage.isEmpty()) {
+		if (productImage != null && !productImage.isEmpty()) {
 			System.out.println(rootDirectory);
 
 			try {
@@ -65,8 +67,8 @@ public class ProductController {
 
 product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".png");
 	//product.setProductPath(rootDirectory + "\\resources\\images\\" + product.getProductName()+ ".png");
-				itemImage.transferTo(new File(
-								 "E:\\resources\\images\\" + product.getProductName()
+                productImage.transferTo(new File(
+                		rootDirectory + "\\resources\\images\\" +  product.getProductName()
 								+ ".png"));
 				
 			}
@@ -76,22 +78,18 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 				
 		}	
 		product.setApproval("pending");
-		//Category cat = categoryService.find(product.getCategory().getCategoryId());
+		Category cat = categoryService.find(product.getCategory().getCategoryId());
 		
-		//cat.addProducts(product);
+		cat.addProducts(product);
 		Vendor vendor=vendorService.getVendorByUserName(principal.getName());
-		//Vendor vendor=vendorService.getVendor(Long.parseLong(id));
 		vendor.addProducts(product);
 		
 		vendorService.saveVendor(vendor);
 		
-        model.addAttribute("addproduct" ,"true");
-		model.addAttribute("vendor",vendor);
-		//model.addAttribute("VendorProducts", productService.getAllProductsByVendorId(Long.parseLong(id)));
-       
+		redirectAttributes.addFlashAttribute("addproduct" ,"true");
+		redirectAttributes.addFlashAttribute("vendor",vendor);
 		
-		//model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
-		return "VendorPage";
+		return "redirect:/vendor";
 
 	}
 	
@@ -103,10 +101,13 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 	}
 	
 	 @ModelAttribute
-	 public void init(Model model){
+	 public void init(Model model,Principal principal){
 		 model.addAttribute("products",productService.findApprovedProducts());
 		 model.addAttribute("categories", categoryService.findAll());	
 		 model.addAttribute("orderDetail", new OrderDetail());
+
+		// model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
+
 	 }
 
 }

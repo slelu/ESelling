@@ -15,21 +15,7 @@
 
 </head>
 <body>
-<div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${admin.firstName}</strong></li>
-			
-			<li><a href=" <spring:url value="/pendingProducts" />" >Approve Products </a></li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >Add Categories</a></li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
+
 				
 </body>
 </html>

@@ -19,56 +19,14 @@
 	
 
 	<!--Main Content goes here --->
-	
-	<div class="container">
-				<c:if test="${not empty admin}">
 <div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${admin.firstName}</strong></li>
-			
-			<li><a href=" <spring:url value="/pendingProducts" />" >Approve Products </a></li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >Add Categories</a></li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
-</c:if>
-<c:if test="${not empty customer}">
-<div class="container">
-			<div class="menu">
-			<ul>
-			
-			<li><strong>Hello ${customer.firstName}</strong></li>	
-			<li><a href=" <spring:url value="/" />" >SignOut</a> </li>
-			<li><a href="#"><pre id="separator">   |   </pre></a></li>	
-	       </ul>	
-				</div>
-				</div>
-</c:if>
-<c:if test="${not empty vendor}">
-<div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${vendor.firstName} </strong></li>
-			
-			<li><a href=" <spring:url value="/addProduct/?id=${vendor.id}" />" >Post New Product </a> </li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >View My Products</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
-</c:if>
-
+				<c:if test="${not empty noproduct}">
+<div class="alert alert-success"  >
+<spring:message code="noproductsavailable"/><br />
 </div>
+</c:if>
+</div>	
+	
 	<div id="main">
 
 		<div id="products">

@@ -10,24 +10,10 @@
 <title>Products</title>
 </head>
 <body>
-	<div class="container">
-<div class="menu">
-		<ul style="background-color:white;">
-			<li><strong>Hello ${admin.firstName}</strong></li>
-			
-			<li><a href=" <spring:url value="/pendingProducts" />" >Approve Products </a></li>
-			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >Add Categories</a></li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
- 	       <li><a href=" <spring:url value="/" />" >SignOut</a> </li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
-		</ul>	
-				</div>
-				
-		</div>	
+	
 		<div class="container">
 				<c:if test="${not empty noproduct}">
-<div class="alert alert-danger"  >
+<div class="alert alert-success"  >
 <spring:message code="NoProductstobeApproved"/><br />
 </div>
 </c:if>
