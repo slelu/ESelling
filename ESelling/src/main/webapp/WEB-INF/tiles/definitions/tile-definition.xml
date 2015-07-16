@@ -58,7 +58,7 @@
 		
 		
 	<definition name="CustomerSignUp" extends="baseLayout">
-		<put-attribute name="title" value="EriPlaza" />
+		<put-attribute name="title" value="Eselling" />
 		<!-- <put-attribute name="heading" value="My Items" /> -->
  		<put-attribute name="body" value="/WEB-INF/jsp/CustomerSignUp.jsp" />
 	</definition>

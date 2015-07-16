@@ -44,7 +44,7 @@ public class Product implements Serializable {
 	private String productPath;
 	//status values active,locked ,exhausted
 	private String Status;
-	@Transient
+
 	private Vendor vendor;
 
 	public Product() {

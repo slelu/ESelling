@@ -3,6 +3,9 @@ package edu.mum.eselling.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,8 @@ import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.MyFinanceService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
+import edu.mum.eselling.smtp.EmailSettings;
+import edu.mum.eselling.smtp.EmailUtil;
 
 @Controller
 public class SignupController {
@@ -72,7 +77,7 @@ public class SignupController {
 
 		List<MyFinance> finance = myFinanceService.getAll();
 
-		for (MyFinance f : finance) {
+		/*for (MyFinance f : finance) {
 			if (f.getCreditCard().getCreditCardNo() != customer.getCreditCard()
 					.getCreditCardNo()
 					|| f.getCreditCard().getCreditCardType() != customer
@@ -91,18 +96,34 @@ public class SignupController {
 
 			}
 
-		}
-		System.out.println(customer.getCredentials().getPassword());
+		}*/
+		
 		customer.getCredentials().setPassword(
 				getHashPassword(customer.getCredentials().getPassword()));
 		customer.setPassword(getHashPassword(customer.getCredentials()
 				.getPassword()));
 
-		customer.setCreditCard(null);
+		
 
 		CustomerService.addNewCustomer(customer);
 		redirectAttributes.addFlashAttribute("successful", "true");
 
+		//send email 
+		final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
+        final String password = "lachimachidoo"; // correct password for gmail id
+		final String toEmail = customer.getEmail();
+
+		
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+        //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+		
+		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+		EmailUtil.sendEmail(session, toEmail, " Welcome " + customer.getFirstName(), customer.getFirstName()+"you have successfully signedup to E-Selling. You can now sign in and purchase from our site. ");
 		return "redirect:/welcome";
 	}
 
@@ -133,7 +154,7 @@ public class SignupController {
 		
 		List<MyFinance> finance = myFinanceService.getAll();
 
-		for (MyFinance f : finance) {
+		/*for (MyFinance f : finance) {
 			if (f.getCreditCard().getCreditCardNo() != vendor.getCreditCard()
 					.getCreditCardNo()
 					|| f.getCreditCard().getCreditCardType() != vendor
@@ -151,7 +172,7 @@ public class SignupController {
 				
 				return "VendorSignUp";
 			}
-		}
+		}*/
 
 		vendor.getCredentials().setPassword(
 				getHashPassword(vendor.getCredentials().getPassword()));
@@ -161,6 +182,23 @@ public class SignupController {
 		redirectAttributes.addFlashAttribute("successful", "true");
 		vendorService.addNewVendor(vendor);
 
+		final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
+        final String password = "lachimachidoo"; // correct password for gmail id
+		final String toEmail = vendor.getEmail();
+
+		
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+        //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+		
+		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+		EmailUtil.sendEmail(session, toEmail, " Welcome " + vendor.getFirstName(),    vendor.getFirstName() + "you have successfully signedup to E-Selling. You can now sign in and Post your Products in  our site. ");
+		
+		
 		return "redirect:/welcome";
 	}
 
@@ -190,8 +228,6 @@ public class SignupController {
 	public String getHashPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
-
-		System.out.println(hashedPassword);
 		return hashedPassword;
 	}
 
