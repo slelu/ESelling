@@ -78,7 +78,7 @@ public class SignupController {
 		List<MyFinance> finance = myFinanceService.getAll();
 
 
-		/*for (MyFinance f : finance) {
+		for (MyFinance f : finance) {
 			if (f.getCreditCard().getCreditCardNo() != customer.getCreditCard()
 					.getCreditCardNo()
 					|| f.getCreditCard().getCreditCardType() != customer
@@ -97,7 +97,7 @@ public class SignupController {
 
 			}
 
-		}*/
+		}
 		
 		customer.getCredentials().setPassword(
 				getHashPassword(customer.getCredentials().getPassword()));

@@ -76,7 +76,7 @@ public class AdminController {
             }
         };
 		
-	//	Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
 	//	EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been Approved. ");
 	
 	return "pendingProducts";
