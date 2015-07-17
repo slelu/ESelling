@@ -1,6 +1,8 @@
 package edu.mum.eselling.repository;
 
 
+
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,8 @@ public interface VendorRepository extends CrudRepository<Vendor, Long> {
 	public Vendor findVendorByUserName(
 			@Param(value = "name") String name);
 
+
+	
+	/*@Query("SELECT vendor FROM Vendor v  INNER JOIN v.products product WHERE WHERE p.id= :id")
+	 public Vendor getVendorByProductId(@Param(value = "id")Long id);*/
 }

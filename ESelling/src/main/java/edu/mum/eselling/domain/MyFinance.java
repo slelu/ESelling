@@ -9,6 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 @Entity
 public class MyFinance implements Serializable {
 
@@ -18,21 +23,21 @@ public class MyFinance implements Serializable {
 	@GeneratedValue
 	private long Id;
    
-//	@NotNull(message="{NotEmpty.CreditCard.number.validation}")
-//	@Pattern(regexp="[2-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
+	@NotNull(message="{NotEmpty.CreditCard.number.validation}")
+	@Pattern(regexp="[2-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
 
 	private String creditCardNo;
 	
 	private String creditCardType;
-//	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
+	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
 	private Integer expMonth;
-//	@NotNull(message="{NotEmpty.CreditCard.expireYear.validation}")
+	@NotNull(message="{NotEmpty.CreditCard.expireYear.validation}")
 	private  Integer expYear;
-//	@NotNull(message="{NotEmpty.CreditCard.cvv.validation}")
-//	@Range(min=100, max=999) 
+	@NotNull(message="{NotEmpty.CreditCard.cvv.validation}")
+	@Range(min=100, max=999) 
 	private  Integer securityCode;
 
-//	@NotEmpty(message="{NotEmpty.CreditCard.name.validation}")
+	@NotEmpty(message="{NotEmpty.CreditCard.name.validation}")
 	//@Pattern(regexp="[a-zA-z]+ [a-zA-Z]*[.]? [a-zA-Z]+", message="{Pattern.CreditCard.name.validation}")
 	private String nameOnCard;
 	
@@ -132,12 +137,5 @@ public class MyFinance implements Serializable {
 		this.creditUsed = creditUsed;
 	}
 	
-	public Boolean purchase(BigDecimal amount){
-		if(this.creditAvailable.compareTo(amount) >= 0){
-			return true;
-		}else{
-			return false;
-		}
-	}
 
 }

@@ -7,40 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.eselling.domain.MyFinance;
-import edu.mum.eselling.domain.Transaction;
 import edu.mum.eselling.repository.MyFinanceRepository;
-import edu.mum.eselling.repository.TransactionRepository;
 import edu.mum.eselling.service.MyFinanceService;
+
 
 @Service
 @Transactional
 public class MyFinanceServiceImpl implements MyFinanceService {
-
+	
 	@Autowired
 	MyFinanceRepository myFinanceRepository;
-	
-	@Autowired
-	TransactionRepository transactionRepository;
 
-	public List<MyFinance> getAll() {
-
-		return (List<MyFinance>) myFinanceRepository.findAll();
+public List<MyFinance> getAll(){
+		
+		return (List<MyFinance>)myFinanceRepository.findAll();
 	}
 
-	@Override
-	public MyFinance findMyFinanceByCreditCardNo(String creditCardNo) {
-		return myFinanceRepository.findMyFinanceByCreditCardNo(creditCardNo);
-	}
-
-	@Override
-	public MyFinance store(MyFinance myFinance) {
-		return myFinanceRepository.save(myFinance);
-	}
-
-	@Override
-	public Transaction store(Transaction mytransaction) {
-		return transactionRepository.save(mytransaction);
-	}
-
-	
 }

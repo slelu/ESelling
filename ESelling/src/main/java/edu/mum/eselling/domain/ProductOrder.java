@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 
 @Entity
 public class ProductOrder implements Serializable {
@@ -31,7 +30,6 @@ public class ProductOrder implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Valid
 	private Address shippingAddress;
 	private BigDecimal orderPrice;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -40,9 +38,6 @@ public class ProductOrder implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
-	private  BigDecimal tax;
-	
-	private BigDecimal total;
 
 
 	public ProductOrder() {
@@ -101,22 +96,10 @@ public class ProductOrder implements Serializable {
         return total;
     }
 	
-	public BigDecimal getTax(){
-		return tax;
+	public void clear(){
+		
 	}
 	
-	public void setTax(BigDecimal tax) {
-		this.tax = tax;
-	}
-	
-	public BigDecimal getTotal(){
-		return total;
-	}
-	
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
 	/**
      * Update the order details and update the total price. If the quantity is 0 or less the order detail is removed from the list.
      */
@@ -132,11 +115,8 @@ public class ProductOrder implements Serializable {
 
             }
         }
+        total.setScale(2, RoundingMode.HALF_UP);
         this.orderPrice = total;
-        this.tax = this.orderPrice.multiply(new BigDecimal(0.05));
-        this.total = this.orderPrice.add(this.tax);
-        this.tax.setScale(2, RoundingMode.CEILING);
-        this.total.setScale(2, RoundingMode.CEILING);
     }
     
     public void addOrderDetail(OrderDetail detail) {
@@ -146,10 +126,6 @@ public class ProductOrder implements Serializable {
             } else {
                 this.orderPrice = this.orderPrice.add(detail.getPrice());
             }
-            this.tax = this.orderPrice.multiply(new BigDecimal(0.05));
-            this.total = this.orderPrice.add(this.tax);
-            this.tax.setScale(2, RoundingMode.CEILING);
-            this.total.setScale(2, RoundingMode.CEILING);
         }
     }
 }

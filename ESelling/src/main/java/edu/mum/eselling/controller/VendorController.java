@@ -34,8 +34,8 @@ public class VendorController {
 		String name = principal.getName();
 		List<Product> myProducts = productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId());
 		
-		if(myProducts.isEmpty()){
-			System.out.println("true");
+		if(myProducts.isEmpty()){			
+			//System.out.println("true");
 			model.addAttribute("emptylist","true");
 		}
 		

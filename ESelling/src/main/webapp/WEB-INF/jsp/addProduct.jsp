@@ -49,7 +49,6 @@
 					<label class="control-label col-lg-2" for="category">Category:</label>
 					<div class="col-lg-10">
 						<form:select class="form:input-large"  id="category"  path="category.categoryId" >
-						<form:option value="0" label="--Select Category--" />
 						<form:options items="${categories}" itemLabel="categoryName"
 							itemValue="categoryId" />
 							

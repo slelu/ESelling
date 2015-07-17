@@ -58,6 +58,9 @@ public class SignupController {
 		return "CustomerSignUp";
 	}
 
+	
+	//customer signup
+	
 	@RequestMapping(value = "/CustomerSignUp", method = RequestMethod.POST)
 	public String processCustomerSignUp(
 			@Valid @ModelAttribute Customer customer, BindingResult result,
@@ -74,30 +77,40 @@ public class SignupController {
 				return "CustomerSignUp";
 			}
 		}
-
+		if(!(customer.getCredentials().getPassword().equals(customer.getCredentials().getVerifyPassword()))){
+			model.addAttribute("password","true");
+			return "CustomerSignUp";
+		}
+		
+		
+		//Credit card Information check
 		List<MyFinance> finance = myFinanceService.getAll();
 
-
 		for (MyFinance f : finance) {
-			if (f.getCreditCard().getCreditCardNo() != customer.getCreditCard()
-					.getCreditCardNo()
-					|| f.getCreditCard().getCreditCardType() != customer
+			if(f.getCreditCardNo().equals(customer.getCreditCard().getCreditCardNo())){
+					
+					if(f.getCreditCardType() != customer
 							.getCreditCard().getCreditCardType()
-					|| f.getCreditCard().getExpMonth() != customer
+					|| f.getExpMonth() != customer
 							.getCreditCard().getExpMonth()
-					|| f.getCreditCard().getExpYear() != customer
+					|| f.getExpYear() != customer
 							.getCreditCard().getExpYear()
-					|| f.getCreditCard().getSecurityCode() != customer
+					|| f.getSecurityCode() != customer
 							.getCreditCard().getSecurityCode()
-					|| f.getCreditCard().getNameOnCard()
-							.equals(customer.getCreditCard().getNameOnCard())) {
+					|| f.getNameOnCard()
+							.equals(customer.getCreditCard().getNameOnCard())) 
 
 				model.addAttribute("wrongCreditCard", "True");
 				return "CustomerSignUp";
 
 			}
+			else{
+					model.addAttribute("nonexistent","true");
+					return "CustomerSignUp";
+				}
+				}
 
-		}
+		
 		
 		customer.getCredentials().setPassword(
 				getHashPassword(customer.getCredentials().getPassword()));
@@ -128,6 +141,9 @@ public class SignupController {
 		return "redirect:/welcome";
 	}
 
+	//Vendor Signup
+	
+	
 	@RequestMapping(value = "/VendorSignUp", method = RequestMethod.GET)
 	public String vendorSignup(@ModelAttribute Vendor vendor) {
 
@@ -151,30 +167,39 @@ public class SignupController {
 				return "VendorSignUp";
 			}
 		}
+		if(!(vendor.getCredentials().getPassword().equals(vendor.getCredentials().getVerifyPassword()))){
+			model.addAttribute("password","true");
+			return "VendorSignUp";
+		}
 		
 		
+		//Credit card Information check
 		List<MyFinance> finance = myFinanceService.getAll();
 
 		for (MyFinance f : finance) {
-			if (f.getCreditCard().getCreditCardNo().equals(vendor.getCreditCard()
-					.getCreditCardNo())
-
-					|| f.getCreditCard().getCreditCardType() != vendor
+		 if(f.getCreditCardNo().equals(vendor.getCreditCard().getCreditCardNo())){
+			
+				if(f.getCreditCardType() != vendor
 							.getCreditCard().getCreditCardType()
-					|| f.getCreditCard().getExpMonth() != vendor
+					|| f.getExpMonth() != vendor
 							.getCreditCard().getExpMonth()
-					|| f.getCreditCard().getExpYear() != vendor
+					|| f.getExpYear() != vendor
 							.getCreditCard().getExpYear()
-					|| f.getCreditCard().getSecurityCode() != vendor
+					|| f.getSecurityCode() != vendor
 							.getCreditCard().getSecurityCode()
-					|| f.getCreditCard().getNameOnCard()
-							.equals(vendor.getCreditCard().getNameOnCard())) {
+					|| !f.getNameOnCard()
+							.equals(vendor.getCreditCard().getNameOnCard())) 
 
 				model.addAttribute("wrongCreditCard", "True");
 				
 				return "VendorSignUp";
 			}
-		}
+				else{
+					model.addAttribute("nonexistent","true");
+					return "VendorSignUp";
+				}
+		 }
+	
 
 		vendor.getCredentials().setPassword(
 				getHashPassword(vendor.getCredentials().getPassword()));

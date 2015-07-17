@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.repository.CredentialRepository;
 import edu.mum.eselling.repository.VendorRepository;
@@ -32,13 +34,16 @@ public class VendorServiceImpl implements VendorService{
 	}
 	
 	public void saveVendor(Vendor vendor) {
-		
 		vendorRepository.save(vendor);
 	}
 	
 	public Vendor getVendorByUserName(String name){
-	
 	return vendorRepository.findVendorByUserName(name);
 }
+	
+	/*public Vendor getVendorByProductId(Long productId){
+		return vendorRepository.getVendorByProductId(productId);
+	}*/
+	
 }
 

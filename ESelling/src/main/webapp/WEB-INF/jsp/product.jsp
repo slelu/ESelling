@@ -88,7 +88,8 @@
 			<section class="container">
 				<div class="row">
 					<div class="col-md-5">
-						<img src="<c:url value="../${product.productPath}"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;">
+					<img src="/resources/images/${product.productName}.png"  alt="${product.productName}" style="float: right; height:246px; width=190px;"/>
+						<%-- <img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;"> --%>
 					</div>
 
 					<div class="col-md-5">

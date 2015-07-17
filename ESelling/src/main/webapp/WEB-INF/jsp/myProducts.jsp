@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
 <title> Vendor Products</title>
 </head>
 <body>
@@ -17,18 +16,20 @@
 </div>
 </c:if>
 </div>
-<div id="main">
-		<div id="products">
-			<section class="container">
-				<div class="row">
+<!-- <div id="main"> -->
+		<!-- <div id="products"> -->
+				<div class="row" >
 				<c:forEach items="${vendorProducts}" var="product">
-					<div class="col-md-5">
-						<img src="<c:url value="../${product.productPath}"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;">  
-					</div>
+				<div class="article" style="padding-bottom: 15px ; float:left ;">
+					<div class="thumbnail" >
+					<!-- <div class="col-md-5"> -->
+						<img src="<c:url value="resources/images/${product.productPath}"></c:url>" alt="image" style = "width:%;"/>  
+					
 
-					<div class="col-md-5">
+					<!-- <div class="col-md-5"> -->
+					<div class="caption">
 					 <h3>${product.productName}</h3>
-         <%--  <p><strong>Status :</strong><span class="label label-warning"> ${product.productApproval}</p> --%>
+         <p><strong>Status :</strong><span class="label label-warning"> ${product.approval}</p> 
 						<p><strong>Description :</strong> ${product.description}</p>
 						<p>
 							<strong>Category :</strong>  ${product.category.categoryName}
@@ -40,22 +41,10 @@
 						</p>
 						
 						<h4>${product.unitPrice}USD</h4>
-						
-						<%-- <p>
-							<a href="<spring:url value="/approveProducts?id=${product.productId}" />" class="btn btn-warning btn-large"> <span
-								class="glyphicon-shopping-cart glyphicon"></span> EDIT
-							</a> 
-							<a href="<spring:url value="/disapproveProduct?id=${product.productId}" />" class="btn btn-default">
-								<span class="glyphicon-hand-right glyphicon"></span>DELETE
-							</a> 
-						</p> --%>
-
+					</div>		
+                    </div>
 					</div>
 					</c:forEach>
 				</div>
-			</section>
-		</div>
-
-	</div>
 </body>
 </html>

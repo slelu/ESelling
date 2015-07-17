@@ -79,8 +79,8 @@
 			
 			<li><a href=" <spring:url value="/pendingProducts" />" >Approve Products </a></li>
 			<li><a href="#"><pre id="separator">   |   </pre> </a></li>
- 	       <li><a href=" <spring:url value="#" />" >Add Categories</a></li>
- 	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
+ 	      <%--  <li><a href=" <spring:url value="#" />" >Add Categories</a></li>
+ 	       <li><a href="#"><pre id="separator">   |   </pre></a></li> --%>
  	       <li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
  	       <li><a href="#"><pre id="separator">   |   </pre></a></li>
 		</ul>	

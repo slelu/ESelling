@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.AdminService;
@@ -47,42 +48,56 @@ public class SearchController {
 
 	@RequestMapping(value = "/productsearch")
 	public String getItemsByCategory(Model model,
-			@RequestParam("categoryId") String categoryId ,Principal principal, HttpSession session) {
+			@RequestParam("categoryId") String categoryId , @RequestParam("search_text") String text ,Principal principal) {
+		
 		
 		List<Product> p= productService.findProductsByCategory(Long.parseLong(categoryId));
-		if(p.isEmpty()){
+		if(p.isEmpty()){	
 			model.addAttribute("noproduct","true");
 		}
-		
-		if (session.equals(null)){
-	 		return "login";
-	 	}
-
-     
-    	 return "randomSearch" ;
-			 
+		model.addAttribute("searchproducts",p);	
 	
 		
-		/*model.addAttribute("products",p);	
+		if(!text.equals("")){
+			List<Product> e =productService.findProductsByName(text);
+			model.addAttribute("searchproducts",e);
+			if(e.isEmpty()){
+				model.addAttribute("noproduct","true");
+			}
+		}
+		
+		if(principal == null){
+		if(!text.equals("")){
+			model.addAttribute("searchproducts",productService.findProductsByName(text));
+		}
+			
+    	 return "randomSearch" ;
+		}
+			 
+
 		
 		return "searchProducts";
-		*/
+		
 		
 	}
 	
 	
 	
 	
+
+	
+	
+	
 	 @ModelAttribute
 		public void init(Model model,Principal principal,HttpSession session){
-			model.addAttribute("products", productService.findApprovedProducts());
+		//	model.addAttribute("products", productService.findApprovedProducts());
 			model.addAttribute("categories", categoryService.findAll());
-			
-		if(principal != null){			
-			 //model.addAttribute("vendorProducts", productService.getAllProductsByVendorId(vendorService.getVendorByUserName(principal.getName()).getId()));	
-			 session.setAttribute("admin",adminService.getAdminByUserName(principal.getName()));
-			 session.setAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
-			 session.setAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+		//	model.addAttribute("searchproducts",null);	
+		if(principal != null){
+			 
+			model.addAttribute("admin",adminService.getAdminByUserName(principal.getName()));
+			model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
+			model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
 			}	
 			
 		}

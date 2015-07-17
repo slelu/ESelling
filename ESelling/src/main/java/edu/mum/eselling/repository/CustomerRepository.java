@@ -3,8 +3,11 @@ package edu.mum.eselling.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+
 import org.springframework.data.repository.query.Param;
 
+import edu.mum.eselling.domain.Admin;
 import edu.mum.eselling.domain.Customer;
 
 

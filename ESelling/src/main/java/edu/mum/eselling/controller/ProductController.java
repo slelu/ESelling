@@ -70,11 +70,10 @@ public class ProductController {
 			try {
 			
 
-product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".png");
+product.setProductPath("\\resources\\images\\" + product.getProductName()+ ".png");
 	//product.setProductPath(rootDirectory + "\\resources\\images\\" + product.getProductName()+ ".png");
-                productImage.transferTo(new File(
-                		rootDirectory + "\\resources\\images\\" +  product.getProductName()
-								+ ".png"));
+productImage.transferTo(new File(
+		"E:\\ESelling\\git\\ESelling\\ESelling\\src\\main\\webapp\\resources\\images\\" + product.getProductName()+ ".png"));
 				
 			}
          catch (Exception e) {

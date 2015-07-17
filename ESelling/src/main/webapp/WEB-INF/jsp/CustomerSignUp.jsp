@@ -19,9 +19,20 @@
 </div> 
 </c:if>
 
+<c:if test="${not empty password}">
+<div class="alert alert-danger"  >
+<spring:message code="passwordmismatch"/><br />
+</div> 
+</c:if>
+<c:if test="${not empty nonexistent}">
+<div class="alert alert-danger"  >
+<spring:message code="creditcardnonexistent"/><br />
+</div> 
+</c:if>
+
 <c:if test="${not empty wrongCreditCard}">
  <div class="alert alert-danger"  >
-<spring:message code="wrongcreditcard"/><br />
+<spring:message code="wrongCreditCard"/><br />
  </div>
 </c:if>
 
