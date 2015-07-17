@@ -13,4 +13,7 @@ public interface VendorService {
 	
 	public Vendor getVendorByUserName(String name);
 
+	
+	/*public Vendor getVendorByProductId(Long productId);*/
+
 }

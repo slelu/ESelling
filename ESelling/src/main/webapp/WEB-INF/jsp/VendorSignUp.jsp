@@ -17,7 +17,25 @@
 <spring:message code="duplicateusername"/><br />
 </div>
 </c:if>
+<c:if test="${not empty password}">
+<div class="alert alert-danger"  >
+<spring:message code="passwordmismatch"/><br />
+</div> 
+</c:if>
+<c:if test="${not empty nonexistent}">
+<div class="alert alert-danger"  >
+<spring:message code="creditcardnonexistent"/><br />
+</div> 
+</c:if>
+
+<c:if test="${not empty wrongCreditCard}">
+ <div class="alert alert-danger"  >
+<spring:message code="wrongcreditcard"/><br />
+ </div>
+</c:if>
+
 </div>
+
 	<section class="container">
 	<form:form modelAttribute="vendor"  class="form-horizontal" method="POST" enctype="utf8">
 		<fieldset>

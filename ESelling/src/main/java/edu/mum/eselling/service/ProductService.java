@@ -18,7 +18,7 @@ public interface ProductService {
 	public Product  save(Product product);
 	
 	public List<Product> getAllProductsByVendorId(Long VendorId);
-	//public List<Product> findByFilter(SearchDto searchDto);
+	public List<Product> findProductsByName(String productName);
 	
 	public Product getProductById(Long productId);
 }

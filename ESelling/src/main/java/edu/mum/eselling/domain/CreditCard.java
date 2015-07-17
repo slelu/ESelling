@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
@@ -21,9 +22,8 @@ public class CreditCard implements Serializable {
 
 	@NotNull(message="{NotEmpty.CreditCard.number.validation}")
 	//@Pattern(regexp="[2-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
-
-	private Long creditCardNo;
-
+	@Pattern(regexp="[1-9][0-9]{15}", message="{Pattern.CreditCard.number.validation}")
+	private String creditCardNo;
 	private String creditCardType;
 	@NotNull(message="{NotEmpty.CreditCard.expireMonth.validation}")
 	private Integer expMonth;
@@ -34,7 +34,6 @@ public class CreditCard implements Serializable {
 	private  Integer securityCode;
 
 	@NotEmpty(message="{NotEmpty.CreditCard.name.validation}")
-	//@Pattern(regexp="[a-zA-z]+ [a-zA-Z]*[.]? [a-zA-Z]+", message="{Pattern.CreditCard.name.validation}")
 	private String nameOnCard;
 	private BigDecimal creditLimit;
 
@@ -77,11 +76,11 @@ public class CreditCard implements Serializable {
 		this.creditCardId = creditCardId;
 	}
 
-	public Long getCreditCardNo() {
+	public String getCreditCardNo() {
 		return creditCardNo;
 	}
 
-	public void setCreditCardNo(Long creditCardNo) {
+	public void setCreditCardNo(String creditCardNo) {
 		this.creditCardNo = creditCardNo;
 	}
 	public Integer getExpMonth() {

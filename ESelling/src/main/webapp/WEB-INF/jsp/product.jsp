@@ -82,7 +82,15 @@
 		</div>
 
 
-		<div id="main">
+
+		<div id="products">
+			<section class="container">
+				<div class="row">
+					<div class="col-md-5">
+					<img src="/resources/images/${product.productName}.png"  alt="${product.productName}" style="float: right; height:246px; width=190px;"/>
+						<%-- <img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;"> --%>
+					</div>
+
 
 			<div id="products">
 				<section class="container">

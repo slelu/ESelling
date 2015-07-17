@@ -6,11 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
 import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
@@ -55,10 +57,11 @@ public class LogInController {
 	return "login";
 	}
 		
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(Model model, HttpSession session) {
+	@RequestMapping(value="/logout", method = RequestMethod.GET )
+	public String logout(Model model, HttpSession session ,SessionStatus status) {
 
-	//	SecurityContextHolder.getContext().setAuthentication(null);
+		SecurityContextHolder.getContext().setAuthentication(null);
+		status.setComplete();
 		session.invalidate();
 	return "redirect:/welcome";
 

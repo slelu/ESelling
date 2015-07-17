@@ -31,24 +31,24 @@
 
 		<div id="products">
 			<ul>
-				<c:forEach items="${products}" var="product">
+				<c:forEach items="${searchproducts}" var="searchproduct">
 					<li id="product" class="products">
 						<div class="innerproduct">
 							<div>
 								<div class="titleOptions">
-									<a href="<spring:url value="/products/product?id=${product.productId}" />"> <img
-										src="<c:url value="${product.productPath}"></c:url>"
+									<a href="<spring:url value="/products/product?id=${searchproduct.productId}" />"> <img
+										src="<c:url value="${searchproduct.productPath}"></c:url>"
 										height="246px" width="190px">
 									</a>
 								</div>
 								<div class="productinfo">
 									<div class="productdescription">
-										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="large bold">
-												${product.productName} </span>
+										<a href="<spring:url value="/products/product?id=${searchproduct.productId}" />"> <span class="large bold">
+												${searchproduct.productName} </span>
 										</a>
 									</div>
 									<div class="productprice">
-										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red">$${product.unitPrice }</span>
+										<a href="<spring:url value="/products/product?id=${searchproduct.productId}" />"> <span class="bold large red">$${searchproduct.unitPrice }</span>
 										</a>
 									</div>
 								</div>

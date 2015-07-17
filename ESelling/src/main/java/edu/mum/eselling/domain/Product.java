@@ -3,10 +3,13 @@ package edu.mum.eselling.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -138,6 +141,14 @@ public class Product implements Serializable {
 
 	public void setProductPath(String productPath) {
 		this.productPath = productPath;
+	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 	public static long getSerialversionuid() {

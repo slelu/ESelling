@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.eselling.domain.Product;
+
 import edu.mum.eselling.repository.ProductRepository;
 import edu.mum.eselling.service.ProductService;
 
@@ -17,13 +18,11 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	/*public List<Product> findByFilter(SearchDto filterElements) {
+	public List<Product> findProductsByName(String productName) {
 				
-		return itemRepository.findByFilter(
-				Long.parseLong(filterElements.getCategory()),
-				filterElements.getItemCondition(),
-				Double.parseDouble(filterElements.getPrice()));
-	}*/
+		return productRepository.findProductsByName(productName);
+				
+	}
 
 	public List<Product> findApprovedProducts() {
 		return (List<Product>) productRepository.findApprovedProducts();

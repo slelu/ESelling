@@ -25,7 +25,7 @@
 				<div class="row">
 				<c:forEach items="${products}" var="product">
 					<div class="col-md-5">
-						<img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="image"  style="float: right; height:246px; width=190px;"/>  
+						<img src="<c:url value="${product.productPath}"></c:url>" alt="image"  style="float: right; height:246px; width=190px;"/>  
 					</div>
 
 					<div class="col-md-5">

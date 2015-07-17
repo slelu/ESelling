@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.eselling.domain.Product;
+import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.ProductService;
+import edu.mum.eselling.service.VendorService;
 import edu.mum.eselling.smtp.EmailSettings;
+import edu.mum.eselling.smtp.EmailUtil;
 
 @Controller
 public class AdminController {
@@ -32,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private VendorService vendorService;
 	
 	
 	@Autowired
@@ -47,7 +53,6 @@ public class AdminController {
 			model.addAttribute("noproduct","empty");
 		}
 	
-		
 	return "pendingProducts";
 	}
 	
@@ -65,7 +70,7 @@ public class AdminController {
 	//send email
 	    final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
         final String password = "lachimachidoo"; // correct password for gmail id
-		//final String toEmail = newproduct.getVendor().getEmail();
+	//final String toEmail = newproduct.getVendor().getEmail();
 
 		
         //create Authenticator object to pass in Session.getInstance argument
@@ -75,15 +80,16 @@ public class AdminController {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
+      //  Vendor vendor= vendorService.getVendorByProductId(Long.parseLong(id));
 		
 		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
 	//	EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been Approved. ");
 	
-	return "pendingProducts";
+	return "redirect:/pendingProducts";
 }
 
 	
-	@RequestMapping(value = "/disapproveProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/disapproveProduct")
     public String editItem(@ModelAttribute Product product ,@RequestParam("id") String id ,Model model) {
 	
 		Product newproduct=productService.find(Long.parseLong(id));
@@ -93,7 +99,7 @@ public class AdminController {
 	    
 	    final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
         final String password = "lachimachidoo"; // correct password for gmail id
-//		final String toEmail = newproduct.getVendor().getEmail();
+	//	final String toEmail = newproduct.getVendor().getEmail();
 
 		
         //create Authenticator object to pass in Session.getInstance argument
@@ -103,12 +109,13 @@ public class AdminController {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
-		
+		//Vendor vendor= vendorService.getVendorByProductId(Long.parseLong(id));
+        
 		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
-	//	EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been DisApproved. ");
+		//EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been DisApproved. ");
 	
 	
-	return "pendingProducts";
+	return "redirect:/pendingProducts";
 	
 	}
 	
