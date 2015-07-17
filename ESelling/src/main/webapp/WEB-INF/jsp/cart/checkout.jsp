@@ -19,8 +19,8 @@
 <body>
 
 	<!-- Header goes here--->
-	<div id="header">
-		<div id="header_container">
+	<div class="container">
+		<div id="header">
 			<div class="right"
 				style="padding-right: 16px; padding-top: 12px; width: 115px; height: 40px; float: right; margin-top: -59px; margin-right: 30px;">
 				<ul>
@@ -47,35 +47,35 @@
 
 			<div class="right" id="share" style="width: 650px">
 				<ul class="nav">
+				<form:form  action="#" method="get">
 					<div class="styled-select">
-						<select>
-							<option>All Categories</option>
-							<option>Beauty</option>
+						<select id="categoryId" name="categoryId">
+						 <c:forEach var="category" items="${categories}">
+							<option value="${category.categoryId}">${category.categoryName}</option>
+						 </c:forEach>
 						</select>
 					</div>
 					<li id="search">
-						<form action="" method="get">
-							<input type="text" name="search_text" id="search_text"
-								placeholder="search a product..." /> <input type="button"
-								name="search_button" id="search_button" value="Search">
-						</form>
+						
+							<input type="text" name="search_text" id="search_text" placeholder="search a product..." /> 
+							<input type="submit" name="search_button" id="search_button" value="Search"/>
+						
 					</li>
+					</form:form>
 				</ul>
 
 				<br class="clear" />
 				<div class="menu">
 					<ul>
-						<li><a href="#">Sign In</a></li>
-
-						<li><a href="#"><pre id="separator">   |   </pre></a></li>
-
-						<li><a href="#">Sign Up</a></li>
-
+						<li><strong>Hello ${customer.firstName}</strong></li>	
+			<li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
 						<li><a href="#"><pre id="separator">   |   </pre></a></li>
 
 						<li><a href="<c:url value="/cart/mycart"/>"><img alt=""
 								src="../resources/images/cart.png">${cart.numberOfProducts}
 								Products</a></li>
+								<li><a href="#"><pre id="separator">   |   </pre></a></li>
+								
 					</ul>
 					<br style="clear: left" />
 				</div>

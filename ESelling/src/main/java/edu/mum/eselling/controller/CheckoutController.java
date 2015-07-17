@@ -20,6 +20,7 @@ import edu.mum.eselling.domain.Cart;
 import edu.mum.eselling.domain.MyFinance;
 import edu.mum.eselling.domain.ProductOrder;
 import edu.mum.eselling.domain.Transaction;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.MyFinanceService;
 import edu.mum.eselling.service.OrderService;
 
@@ -35,6 +36,10 @@ public class CheckoutController {
 	
 	@Autowired
 	private MyFinanceService myFinanceService;
+	
+	@Autowired
+	CustomerService customerService;
+
 	
 	
 
@@ -97,4 +102,11 @@ public class CheckoutController {
         this.cart.clear(); // clear the cart
         return "redirect:/loginSuccess";
     }
+	
+	
+	@ModelAttribute
+	public void init(Model model,Principal principal) {
+//		
+		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+	}
 }

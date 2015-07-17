@@ -26,6 +26,7 @@ import edu.mum.eselling.domain.OrderDetail;
 import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.CategoryService;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
 import edu.mum.eselling.smtp.EmailSettings;
@@ -40,6 +41,9 @@ public class ProductController {
 	CategoryService categoryService;
 	@Autowired
 	VendorService vendorService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	
 	
@@ -118,13 +122,15 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 	
 	
 	@RequestMapping("/products/product")
-	public String getProductById(@RequestParam("id") String productId, Model model) {
+	public String getProductById(@RequestParam("id") String productId, Model model,Principal principal) {
 		model.addAttribute("product", productService.getProductById(Long.parseLong(productId)));
+		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
 		return "product";
 	}
 	
 	 @ModelAttribute
 	 public void init(Model model,Principal principal){
+		 
 		 model.addAttribute("products",productService.findApprovedProducts());
 		 model.addAttribute("categories", categoryService.findAll());	
 		 model.addAttribute("orderDetail", new OrderDetail());
