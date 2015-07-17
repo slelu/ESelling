@@ -1,6 +1,7 @@
 package edu.mum.eselling.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,12 +23,12 @@ public class Transaction implements Serializable {
 	@GeneratedValue
 	private Long transactionId;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<CreditCard> creditCards;
-	@Temporal(TemporalType.DATE)
-	private Date transactionDate;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private ProductOrder order;
+	private MyFinance myFinance;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date transactionDate;
+	private BigDecimal amount;
+	private Boolean status;
 
 	public Transaction() {
 		super();
@@ -42,12 +42,12 @@ public class Transaction implements Serializable {
 		this.transactionId = transactionId;
 	}
 
-	public List<CreditCard> getCreditCard() {
-		return creditCards;
+	public MyFinance getMyFinance() {
+		return myFinance;
 	}
 
-	public void addCreditCard(CreditCard creditCard) {
-		creditCards.add(creditCard);
+	public void setMyFinance(MyFinance myFinance) {
+		this.myFinance = myFinance;
 	}
 
 	public Date getTransactionDate() {
@@ -58,13 +58,22 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	public ProductOrder getOrders() {
-		return order;
+	public BigDecimal getAmount() {
+		return amount;
 	}
 
-	public void setOrders(ProductOrder order) {
-		this.order = order;
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	
 	
 }

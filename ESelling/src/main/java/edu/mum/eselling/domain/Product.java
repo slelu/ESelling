@@ -44,8 +44,6 @@ public class Product implements Serializable {
 	private String productPath;
 	//status values active,locked ,exhausted
 	private String Status;
-	@Transient
-	private Vendor vendor;
 
 	public Product() {
 		super();
@@ -138,14 +136,6 @@ public class Product implements Serializable {
 
 	public void setProductPath(String productPath) {
 		this.productPath = productPath;
-	}
-
-	public Vendor getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
 	}
 
 	public static long getSerialversionuid() {

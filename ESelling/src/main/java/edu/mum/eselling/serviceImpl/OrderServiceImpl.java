@@ -34,6 +34,8 @@ public class OrderServiceImpl implements OrderService {
 		}
 		productOrder.setOrderDate(new Date());
 		productOrder.setCustomer(customerService.getCustomerByUserName(principal.getName()));
+		productOrder.setTax(productOrder.getTax());
+		productOrder.setTotal(productOrder.getTotal());
 		return productOrder;
 	}
 

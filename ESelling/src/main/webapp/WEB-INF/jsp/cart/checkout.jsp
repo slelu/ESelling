@@ -87,7 +87,11 @@
 	<div id="main">
 
 		<div id="products">
-
+<c:if test="${not empty cannotPurchase}">
+<div class="alert alert-success"  >
+<spring:message code="cannot.Purchase"/><br />
+</div>
+</c:if>
 			<form:form method="POST" modelAttribute="productOrder"
 				class="form-horizontal">
 				<%--     <div class="clear">
@@ -156,7 +160,8 @@
 						<table>
 							<thead>
 								<tr>
-									<th><spring:message code="product.productName" /></th>
+									<th width="100px"><spring:message code="product.productName" /></th>
+									<th></th>
 									<th><spring:message code="order.quantity" /></th>
 									<th><spring:message code="product.unitPrice" /></th>
 								</tr>
@@ -168,7 +173,7 @@
 										<td><img
 											src="<c:url value="../${detail.product.productPath}"></c:url>"
 											alt="${product.productName}"
-											style="float: right; height: 246px;"></td>
+											style="float: right; height: 146px;"></td>
 										<td>${detail.product.productName}</td>
 										<td><form:input
 												path="orderDetails[${status.index}].quantity" size="2" /></td>
@@ -177,9 +182,15 @@
 								</c:forEach>
 								<tr>
 									<td colspan="2" align="right"><b><spring:message
+												code="order.tax" /></b></td>
+
+									<td><fmt:formatNumber value="${productOrder.tax}" 
+            type="currency"/></td>
+									<td colspan="2" align="right"><b><spring:message
 												code="order.total" /></b></td>
 
-									<td>${productOrder.orderPrice}</td>
+									<td><fmt:formatNumber value="${productOrder.total}" 
+            type="currency"/></td>
 								</tr>
 							</tbody>
 						</table>

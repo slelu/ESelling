@@ -3,8 +3,6 @@ package edu.mum.eselling.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import antlr.PythonCodeGenerator;
-
 
 public class CartItem implements Serializable {
 

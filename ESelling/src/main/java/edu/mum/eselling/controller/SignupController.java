@@ -72,26 +72,26 @@ public class SignupController {
 
 		List<MyFinance> finance = myFinanceService.getAll();
 
-		for (MyFinance f : finance) {
-			if (f.getCreditCard().getCreditCardNo() != customer.getCreditCard()
-					.getCreditCardNo()
-					|| f.getCreditCard().getCreditCardType() != customer
-							.getCreditCard().getCreditCardType()
-					|| f.getCreditCard().getExpMonth() != customer
-							.getCreditCard().getExpMonth()
-					|| f.getCreditCard().getExpYear() != customer
-							.getCreditCard().getExpYear()
-					|| f.getCreditCard().getSecurityCode() != customer
-							.getCreditCard().getSecurityCode()
-					|| f.getCreditCard().getNameOnCard()
-							.equals(customer.getCreditCard().getNameOnCard())) {
-
-				model.addAttribute("wrongCreditCard", "True");
-				return "CustomerSignUp";
-
-			}
-
-		}
+//		for (MyFinance f : finance) {
+//			if (f.getCreditCard().getCreditCardNo() != customer.getCreditCard()
+//					.getCreditCardNo()
+//					|| f.getCreditCard().getCreditCardType() != customer
+//							.getCreditCard().getCreditCardType()
+//					|| f.getCreditCard().getExpMonth() != customer
+//							.getCreditCard().getExpMonth()
+//					|| f.getCreditCard().getExpYear() != customer
+//							.getCreditCard().getExpYear()
+//					|| f.getCreditCard().getSecurityCode() != customer
+//							.getCreditCard().getSecurityCode()
+//					|| f.getCreditCard().getNameOnCard()
+//							.equals(customer.getCreditCard().getNameOnCard())) {
+//
+//				model.addAttribute("wrongCreditCard", "True");
+//				return "CustomerSignUp";
+//
+//			}
+//
+//		}
 		System.out.println(customer.getCredentials().getPassword());
 		customer.getCredentials().setPassword(
 				getHashPassword(customer.getCredentials().getPassword()));
@@ -133,9 +133,9 @@ public class SignupController {
 		
 		List<MyFinance> finance = myFinanceService.getAll();
 
-		for (MyFinance f : finance) {
-			if (f.getCreditCard().getCreditCardNo() != vendor.getCreditCard()
-					.getCreditCardNo()
+		/*for (MyFinance f : finance) {
+			if (f.getCreditCard().getCreditCardNo().equals(vendor.getCreditCard()
+					.getCreditCardNo())
 					|| f.getCreditCard().getCreditCardType() != vendor
 							.getCreditCard().getCreditCardType()
 					|| f.getCreditCard().getExpMonth() != vendor
@@ -151,7 +151,7 @@ public class SignupController {
 				
 				return "VendorSignUp";
 			}
-		}
+		}*/
 
 		vendor.getCredentials().setPassword(
 				getHashPassword(vendor.getCredentials().getPassword()));
