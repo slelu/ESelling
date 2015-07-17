@@ -22,8 +22,6 @@
 	<form:form modelAttribute="vendor"  class="form-horizontal" method="POST" enctype="utf8">
 		<fieldset>
 				<legend>New Vendor</legend>
-
-				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 				
 				<div class="form-group">
 				<label class="control-label col-lg-2" for="firstName">First Name:</label>

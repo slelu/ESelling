@@ -18,8 +18,7 @@
 			<fieldset>
 				<legend>New product</legend>
 
-				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
-
+	
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="name">Product Name:</label>
 					<div class="col-lg-10">

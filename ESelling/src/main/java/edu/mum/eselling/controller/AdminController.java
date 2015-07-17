@@ -6,6 +6,10 @@ package edu.mum.eselling.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +22,7 @@ import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.AdminService;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.ProductService;
+import edu.mum.eselling.smtp.EmailSettings;
 
 @Controller
 public class AdminController {
@@ -53,10 +58,26 @@ public class AdminController {
 		
 		Product newproduct=productService.find(Long.parseLong(id));
         newproduct.setApproval("approved");
+        
+        
 	
 	    productService.save(newproduct);
-	
-	
+	//send email
+	    final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
+        final String password = "lachimachidoo"; // correct password for gmail id
+		//final String toEmail = newproduct.getVendor().getEmail();
+
+		
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+        //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+		
+	//	Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+	//	EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been Approved. ");
 	
 	return "pendingProducts";
 }
@@ -69,6 +90,23 @@ public class AdminController {
 		newproduct.setApproval("disapproved");
 			
 	    productService.save(newproduct);
+	    
+	    final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
+        final String password = "lachimachidoo"; // correct password for gmail id
+//		final String toEmail = newproduct.getVendor().getEmail();
+
+		
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+        //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+		
+		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+	//	EmailUtil.sendEmail(session, toEmail, " Notification " + newproduct.getVendor().getFirstName(), newproduct.getVendor().getFirstName()+"Your Products you Posted on E-selling have been DisApproved. ");
+	
 	
 	return "pendingProducts";
 	

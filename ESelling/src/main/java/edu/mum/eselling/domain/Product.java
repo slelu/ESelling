@@ -45,6 +45,8 @@ public class Product implements Serializable {
 	//status values active,locked ,exhausted
 	private String Status;
 
+	private Vendor vendor;
+
 	public Product() {
 		super();
 	}

@@ -58,15 +58,15 @@ public class SearchController {
 	 		return "login";
 	 	}
 
-     if(principal == null){
+     
     	 return "randomSearch" ;
 			 
-		 }
+	
 		
-		model.addAttribute("products",p);	
+		/*model.addAttribute("products",p);	
 		
 		return "searchProducts";
-		
+		*/
 		
 	}
 	
@@ -74,15 +74,15 @@ public class SearchController {
 	
 	
 	 @ModelAttribute
-		public void init(Model model,Principal principal){
+		public void init(Model model,Principal principal,HttpSession session){
 			model.addAttribute("products", productService.findApprovedProducts());
 			model.addAttribute("categories", categoryService.findAll());
 			
 		if(principal != null){			
 			 //model.addAttribute("vendorProducts", productService.getAllProductsByVendorId(vendorService.getVendorByUserName(principal.getName()).getId()));	
-			 model.addAttribute("admin",adminService.getAdminByUserName(principal.getName()));
-			 model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
-			 model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+			 session.setAttribute("admin",adminService.getAdminByUserName(principal.getName()));
+			 session.setAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
+			 session.setAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
 			}	
 			
 		}

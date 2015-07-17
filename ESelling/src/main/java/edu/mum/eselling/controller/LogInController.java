@@ -84,8 +84,6 @@ public class LogInController {
 	        		
 	 
 	        model.addAttribute("admin",adminService.getAdminByUserName(name));
-	       	
-	        	
 	            return "AdminPage";
 	        }
 	        else{

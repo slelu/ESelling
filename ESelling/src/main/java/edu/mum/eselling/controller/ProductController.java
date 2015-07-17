@@ -4,6 +4,9 @@ package edu.mum.eselling.controller;
 import java.io.File;
 import java.security.Principal;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -25,6 +28,8 @@ import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
+import edu.mum.eselling.smtp.EmailSettings;
+import edu.mum.eselling.smtp.EmailUtil;
 
 
 @Controller
@@ -88,6 +93,24 @@ product.setProductPath("E:\\resources\\images\\" + product.getProductName()+ ".p
 		
 		redirectAttributes.addFlashAttribute("addproduct" ,"true");
 		redirectAttributes.addFlashAttribute("vendor",vendor);
+		
+		//send e-mail
+		
+		final String fromEmail = "pmesellingroup3@gmail.com"; //requires valid gmail id
+        final String password = "lachimachidoo"; // correct password for gmail id
+		final String toEmail = vendor.getEmail();
+
+		
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+        //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+		
+		Session session = Session.getInstance(EmailSettings.getEmailProperties(), auth);
+		EmailUtil.sendEmail(session, toEmail, " Notification " + vendor.getFirstName(), vendor.getFirstName()+"you have successfully added your Products to E-Selling and they are waiting for Approval. You can now sign in and purchase from our site or Check the Status of your Products. ");
 		
 		return "redirect:/vendor";
 
