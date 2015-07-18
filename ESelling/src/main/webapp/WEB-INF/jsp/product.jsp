@@ -64,15 +64,11 @@
 				<br class="clear" />
 				<div class="menu">
 					<ul>
-						<li><a href="#">Sign In</a></li>
-						
-						<li><a href="#"><pre id="separator">   |   </pre></a></li>
-						
-						<li><a href="#">Sign Up</a></li>
-						
-						<li><a href="#"><pre id="separator">   |   </pre></a></li>
-						
+						<li><strong>Hello ${customer.firstName}</strong></li>	
+			<li><a href=" <spring:url value="/logout" />" >SignOut</a> </li>
+						<li><a href="#"><pre id="separator">   |   </pre></a></li>						
 						<li><a href="<c:url value="/cart/checkout"/>"><img alt="" src="../resources/images/cart.png">${cart.numberOfProducts} Products</a></li>
+						<li><a href="#"><pre id="separator">   |   </pre></a></li>
 					</ul>
 					<br style="clear: left" />
 				</div>
@@ -88,7 +84,7 @@
 			<section class="container">
 				<div class="row">
 					<div class="col-md-5">
-					<img src="/resources/images/${product.productName}.png"  alt="${product.productName}" style="float: right; height:246px; width=190px;"/>
+					<img src="${product.productPath}"  alt="${product.productName}" style="float: right; height:246px; width=190px;"/>
 						<%-- <img src="<c:url value="/resources/images/${product.productName}.png"></c:url>" alt="${product.productName}" style="float: right; height:246px; width=190px;"> --%>
 					</div>
 

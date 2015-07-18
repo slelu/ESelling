@@ -26,6 +26,7 @@ import edu.mum.eselling.domain.OrderDetail;
 import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.domain.Vendor;
 import edu.mum.eselling.service.CategoryService;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 import edu.mum.eselling.service.VendorService;
 import edu.mum.eselling.smtp.EmailSettings;
@@ -40,6 +41,8 @@ public class ProductController {
 	CategoryService categoryService;
 	@Autowired
 	VendorService vendorService;
+	@Autowired
+	CustomerService customerService;
 
 	
 	
@@ -70,7 +73,7 @@ public class ProductController {
 			try {
 			
 
-product.setProductPath("\\resources\\images\\" + product.getProductName()+ ".png");
+product.setProductPath("/resources/images/" + product.getProductName()+ ".png");
 	//product.setProductPath(rootDirectory + "\\resources\\images\\" + product.getProductName()+ ".png");
 productImage.transferTo(new File(
 		"E:\\ESelling\\git\\ESelling\\ESelling\\src\\main\\webapp\\resources\\images\\" + product.getProductName()+ ".png"));
@@ -117,8 +120,12 @@ productImage.transferTo(new File(
 	
 	
 	@RequestMapping("/products/product")
-	public String getProductById(@RequestParam("id") String productId, Model model) {
+	public String getProductById(@RequestParam("id") String productId, Model model,Principal principal) {
 		model.addAttribute("product", productService.getProductById(Long.parseLong(productId)));
+		//model.addAttribute(attributeValue)
+		if(principal != null){
+		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+		}
 		return "product";
 	}
 	
@@ -127,6 +134,7 @@ productImage.transferTo(new File(
 		 model.addAttribute("products",productService.findApprovedProducts());
 		 model.addAttribute("categories", categoryService.findAll());	
 		 model.addAttribute("orderDetail", new OrderDetail());
+		
 
 		// model.addAttribute("vendor",vendorService.getVendorByUserName(principal.getName()));
 

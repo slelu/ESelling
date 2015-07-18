@@ -16,11 +16,11 @@
 		<div id="products">
 			<ul>
 				<c:forEach items="${products}" var="product">
-					<li id="product" class="products">
+					<li id="product1" class="products">
 						<div class="innerproduct">
 							<div>
 								<div class="titleOptions">
-									<a href="<spring:url value="/products/product?id=${product.productId}" />"> <img
+									<a href="<spring:url value="/products/product?id=${product.productId}" height="30%px" width="30%;"/>"> <img
 										src="<c:url value="${product.productPath}"></c:url>"
 										height="246px" width="190px">
 									</a>

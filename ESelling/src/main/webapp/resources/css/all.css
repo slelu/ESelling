@@ -499,7 +499,8 @@ a.block_big {
 	list-style-image: none;
 }
 
-#product {
+#product1 {
+	
 	list-style-type: none;
 	vertical-align: top;
 	overflow: hidden;
@@ -508,6 +509,23 @@ a.block_big {
 	margin: 0 12px 12px 0;
 	border: 1px solid #cfcece;
 	padding: 15px;
+	
+	
+	float: left;
+	width: 220px;
+}
+
+#product1 {
+	list-style-type: none;
+	vertical-align: top;
+	overflow: hidden;
+	zoom: 1.0;
+	position: relative;
+	margin: 0 12px 12px 0;
+	border: 1px solid #cfcece;
+	padding: 15px;	
+	float: left;
+	
 }
 
 

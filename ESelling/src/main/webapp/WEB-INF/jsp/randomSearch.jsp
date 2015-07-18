@@ -32,7 +32,7 @@
 		<div id="products">
 			<ul>
 				<c:forEach items="${searchproducts}" var="searchproduct">
-					<li id="product" class="products">
+					<li id="product1" class="products">
 						<div class="innerproduct">
 							<div>
 								<div class="titleOptions">

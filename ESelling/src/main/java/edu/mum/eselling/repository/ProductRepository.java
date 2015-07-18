@@ -18,7 +18,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 			@Param(value = "categoryId") Long categoryId);
 			
 			
-     @Query("SELECT p FROM Product p WHERE p.productName like %?1 AND p.productApproval = 'approved'")
+     @Query("SELECT p FROM Product p WHERE p.productName like ?1% AND p.productApproval = 'approved'")
      public List<Product> findProductsByName(String productName);
  
 	@Query("SELECT product FROM Vendor v  INNER JOIN v.products product WHERE v.id= :id")

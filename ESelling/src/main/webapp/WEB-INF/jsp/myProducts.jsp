@@ -23,7 +23,7 @@
 				<div class="article" style="padding-bottom: 15px ; float:left ;">
 					<div class="thumbnail" >
 					<!-- <div class="col-md-5"> -->
-						<img src="<c:url value="resources/images/${product.productPath}"></c:url>" alt="image" style = "width:%;"/>  
+						<img src="<c:url value="${product.productPath}"></c:url>" alt="image" style = "width:30%;float:left;"/>  
 					
 
 					<!-- <div class="col-md-5"> -->

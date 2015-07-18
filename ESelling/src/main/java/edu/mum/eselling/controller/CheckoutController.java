@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import edu.mum.eselling.domain.Cart;
 import edu.mum.eselling.domain.ProductOrder;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.OrderService;
 
 @Controller
@@ -28,6 +29,9 @@ public class CheckoutController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public void show(Model model, Principal principal, HttpSession session) {
@@ -71,4 +75,9 @@ public class CheckoutController {
         this.cart.clear(); // clear the cart
         return "redirect:/welcome";
     }
+	
+	public void init(Model model,Principal principal,HttpSession session){
+			model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+			}	
+	
 }

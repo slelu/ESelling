@@ -33,8 +33,8 @@
 		<div id="products">
 			<ul>
 				<c:forEach items="${products}" var="product">
-					<li id="product" class="products">
-						<div class="innerproduct">
+					<li id="product1" class="products">
+						<div class="innerproduct" style="width:180px;">
 							<div>
 								<div class="titleOptions">
 									<a href="<spring:url value="/products/product?id=${product.productId}" />"> 
