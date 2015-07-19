@@ -17,12 +17,11 @@
 			<ul>
 				<c:forEach items="${products}" var="product">
 					<li id="product1" class="products">
-						<div class="innerproduct">
+						<div class="innerproduct" style="width:180px;">
 							<div>
 								<div class="titleOptions">
-									<a href="<spring:url value="/products/product?id=${product.productId}" height="30%px" width="30%;"/>"> <img
-										src="<c:url value="${product.productPath}"></c:url>"
-										height="246px" width="190px">
+									<a href="<spring:url value="/products/product?id=${product.productId}" />"> 
+										<img src="<c:url value="${product.productPath}"></c:url>" alt="image"  height="246px" width="190px"/>  
 									</a>
 								</div>
 								<div class="productinfo">
@@ -32,7 +31,7 @@
 										</a>
 									</div>
 									<div class="productprice">
-										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red">$${product.unitPrice }</span>
+										<a href="<spring:url value="/products/product?id=${product.productId}" />"> <span class="bold large red"><fmt:formatNumber value="${product.unitPrice}" type="currency"/></span>
 										</a>
 									</div>
 								</div>
@@ -46,6 +45,7 @@
 
 
 	</div>
+
 
 </body>
 </html>

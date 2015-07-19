@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/sql"/>
         <wb-resource deploy-path="/" source-path="/Project Mngt"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/" source-path="/scr"/>
         <property name="context-root" value="eselling"/>
         <property name="java-output-path" value="/ESelling/target/classes"/>
     </wb-module>

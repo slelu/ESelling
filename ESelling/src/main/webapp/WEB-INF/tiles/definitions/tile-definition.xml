@@ -125,4 +125,6 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/myProducts.jsp" />
 	</definition> 	
 	 	
+
+	 	
 </tiles-definitions>

@@ -41,6 +41,7 @@ public class ProductController {
 	CategoryService categoryService;
 	@Autowired
 	VendorService vendorService;
+
 	@Autowired
 	CustomerService customerService;
 
@@ -122,15 +123,18 @@ productImage.transferTo(new File(
 	@RequestMapping("/products/product")
 	public String getProductById(@RequestParam("id") String productId, Model model,Principal principal) {
 		model.addAttribute("product", productService.getProductById(Long.parseLong(productId)));
+
 		//model.addAttribute(attributeValue)
 		if(principal != null){
 		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
 		}
+
 		return "product";
 	}
 	
 	 @ModelAttribute
 	 public void init(Model model,Principal principal){
+		 
 		 model.addAttribute("products",productService.findApprovedProducts());
 		 model.addAttribute("categories", categoryService.findAll());	
 		 model.addAttribute("orderDetail", new OrderDetail());

@@ -17,7 +17,11 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import edu.mum.eselling.domain.Cart;
 import edu.mum.eselling.domain.ProductOrder;
+
+import edu.mum.eselling.service.CategoryService;
 import edu.mum.eselling.service.CustomerService;
+import edu.mum.eselling.service.MyFinanceService;
+
 import edu.mum.eselling.service.OrderService;
 
 @Controller
@@ -29,9 +33,23 @@ public class CheckoutController {
 
 	@Autowired
 	private OrderService orderService;
+
+
+	
+	@Autowired
+	private MyFinanceService myFinanceService;
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	CategoryService categoryService;
+
+
+	
+	
+
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public void show(Model model, Principal principal, HttpSession session) {
@@ -65,7 +83,7 @@ public class CheckoutController {
             this.orderService.store(productOrder);
             status.setComplete(); //remove order from session
             this.cart.clear(); // clear the cart
-            return "redirect:/welcome";
+            return "redirect:/loginSuccess";
         }
     }
 	
@@ -73,11 +91,15 @@ public class CheckoutController {
     public String cancel(SessionStatus status, @ModelAttribute ProductOrder productOrder, HttpSession session) {
 		status.setComplete(); //remove order from session
         this.cart.clear(); // clear the cart
-        return "redirect:/welcome";
+        return "redirect:/loginSuccess";
     }
+
 	
-	public void init(Model model,Principal principal,HttpSession session){
-			model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
-			}	
-	
+	@ModelAttribute
+	public void init(Model model,Principal principal) {
+//		
+		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
+		 model.addAttribute("categories", categoryService.findAll());
+	}
+
 }

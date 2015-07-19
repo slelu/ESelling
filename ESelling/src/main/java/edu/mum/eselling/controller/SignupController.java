@@ -85,10 +85,12 @@ public class SignupController {
 		
 		//Credit card Information check
 		List<MyFinance> finance = myFinanceService.getAll();
-
+int found=0;
 		for (MyFinance f : finance) {
 			if(f.getCreditCardNo().equals(customer.getCreditCard().getCreditCardNo())){
-					
+				found=1;
+			}
+				/*
 					if(f.getCreditCardType() != customer
 							.getCreditCard().getCreditCardType()
 					|| f.getExpMonth() != customer
@@ -101,10 +103,9 @@ public class SignupController {
 							.equals(customer.getCreditCard().getNameOnCard())) 
 
 				model.addAttribute("wrongCreditCard", "True");
-				return "CustomerSignUp";
+				return "CustomerSignUp";*/
 
-			}
-			else{
+			if(found==0){
 					model.addAttribute("nonexistent","true");
 					return "CustomerSignUp";
 				}
@@ -175,11 +176,12 @@ public class SignupController {
 		
 		//Credit card Information check
 		List<MyFinance> finance = myFinanceService.getAll();
-
+int found=0;
 		for (MyFinance f : finance) {
 		 if(f.getCreditCardNo().equals(vendor.getCreditCard().getCreditCardNo())){
-			
-				if(f.getCreditCardType() != vendor
+			found=1;
+		 }
+				/*if(f.getCreditCardType() != vendor
 							.getCreditCard().getCreditCardType()
 					|| f.getExpMonth() != vendor
 							.getCreditCard().getExpMonth()
@@ -193,8 +195,8 @@ public class SignupController {
 				model.addAttribute("wrongCreditCard", "True");
 				
 				return "VendorSignUp";
-			}
-				else{
+			}*/
+		 if(found==0){
 					model.addAttribute("nonexistent","true");
 					return "VendorSignUp";
 				}

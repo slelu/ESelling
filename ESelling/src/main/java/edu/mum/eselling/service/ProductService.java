@@ -21,4 +21,6 @@ public interface ProductService {
 	public List<Product> findProductsByName(String productName);
 	
 	public Product getProductById(Long productId);
+	
+	public void deleteProducts(Long productId);
 }

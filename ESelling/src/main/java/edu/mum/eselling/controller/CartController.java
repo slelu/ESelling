@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.eselling.domain.Cart;
 import edu.mum.eselling.domain.Product;
+import edu.mum.eselling.service.CustomerService;
 import edu.mum.eselling.service.ProductService;
 
 @Controller
@@ -24,6 +25,9 @@ public class CartController {
 	private Cart cart;
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	@RequestMapping("/cart/add/{productId}")
 	public String addToCart(@PathVariable("productId") long productId,
@@ -51,8 +55,9 @@ public class CartController {
 	}
 
 	@ModelAttribute
-	public void init(Model model, HttpSession session) {
+	public void init(Model model, HttpSession session,Principal principal) {
 //		model.addAttribute("cart", cart);
 		session.setAttribute("cart", cart);
+		model.addAttribute("customer",customerService.getCustomerByUserName(principal.getName()));
 	}
 }

@@ -20,7 +20,7 @@
 		<!-- <div id="products"> -->
 				<div class="row" >
 				<c:forEach items="${vendorProducts}" var="product">
-				<div class="article" style="padding-bottom: 15px ; float:left ;">
+				<div class="article" style="padding-bottom: 15px ; float:left ;width:30%;height:30%">
 					<div class="thumbnail" >
 					<!-- <div class="col-md-5"> -->
 						<img src="<c:url value="${product.productPath}"></c:url>" alt="image" style = "width:30%;float:left;"/>  
@@ -41,6 +41,10 @@
 						</p>
 						
 						<h4>${product.unitPrice}USD</h4>
+						<p>
+							<a href="<spring:url value="#" />" class="btn btn-warning btn-large"> <span
+								class="glyphicon-shopping-cart glyphicon"></span> DELETE
+							</a> 
 					</div>		
                     </div>
 					</div>

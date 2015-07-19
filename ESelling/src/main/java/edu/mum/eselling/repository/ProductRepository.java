@@ -31,6 +31,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	@Query("SELECT p FROM Product p   WHERE p.productApproval= 'pending' ")
 	public List<Product> findPendingProducts() ;
+	
+
 }
 
 

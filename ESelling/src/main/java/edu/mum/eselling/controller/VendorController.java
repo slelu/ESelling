@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.eselling.domain.Product;
 import edu.mum.eselling.service.CategoryService;
@@ -30,7 +32,7 @@ public class VendorController {
 	
 
 	@RequestMapping(value="/myProducts", method = RequestMethod.GET)
-	public String getItemById(Model model ,Principal principal) {
+	public String getProductsById(Model model ,Principal principal) {
 		String name = principal.getName();
 		List<Product> myProducts = productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId());
 		
@@ -50,6 +52,25 @@ public class VendorController {
 		return "VendorPage";
 	}
 	
+	@RequestMapping(value="/deleteProducts", method = RequestMethod.GET)
+ public String deleteProduct(@ModelAttribute Product product ,@RequestParam("id") String id ,
+		 Model model,Principal principal,RedirectAttributes redirectAttributes) {
+	
+		
+		productService.deleteProducts(Long.parseLong(id));
+		
+		String name = principal.getName();
+		
+		List<Product> myProducts = productService.getAllProductsByVendorId(vendorService.getVendorByUserName(name).getId());
+		
+		if(myProducts.isEmpty()){			
+			redirectAttributes.addFlashAttribute("emptylist","true");
+		}
+		
+		redirectAttributes.addFlashAttribute("vendorProducts",myProducts );
+	    
+		return "redirect:/myProducts";
+	}
 	
 	
 	@ModelAttribute
